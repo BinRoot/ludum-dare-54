@@ -1,27 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://crqscw606c2o"]
+[gd_scene load_steps=3 format=3 uid="uid://crqscw606c2o"]
 
 [ext_resource type="PackedScene" uid="uid://rfxhq88l6qs0" path="res://scenes/character.tscn" id="1_14vv8"]
+[ext_resource type="Script" path="res://scenes/island.gd" id="1_sfxij"]
 
 [node name="Island" type="Node2D"]
+script = ExtResource("1_sfxij")
 
 [node name="Fisher" parent="." instance=ExtResource("1_14vv8")]
-position = Vector2(795, 267)
+position = Vector2(422, 66)
 enabled_skills = Array[String](["catch_fish"])
 
 [node name="Cook" parent="." instance=ExtResource("1_14vv8")]
-position = Vector2(112, 253)
+position = Vector2(73, 194)
 enabled_skills = Array[String](["cook_fish"])
 
-[node name="Label" type="Label" parent="."]
-offset_left = 158.0
-offset_top = 169.0
-offset_right = 198.0
-offset_bottom = 192.0
-text = "cook"
+[node name="Locations" type="Node2D" parent="."]
 
-[node name="Label2" type="Label" parent="."]
-offset_left = 837.0
-offset_top = 161.0
-offset_right = 877.0
-offset_bottom = 187.0
-text = "fisher"
+[node name="Market" type="Node2D" parent="Locations" groups=["market"]]
+position = Vector2(395, 130)
+
+[node name="Label" type="Label" parent="Locations/Market"]
+offset_right = 57.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "market"
+
+[node name="Camp" type="Node2D" parent="Locations" groups=["camp"]]
+position = Vector2(113, 120)
+
+[node name="Label" type="Label" parent="Locations/Camp"]
+offset_right = 43.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "camp"
+
+[node name="Docks" type="Node2D" parent="Locations" groups=["docks"]]
+position = Vector2(581, 237)
+
+[node name="Label" type="Label" parent="Locations/Docks"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "docks"

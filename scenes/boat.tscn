@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://di1dvdat5ojlt"]
+
+[ext_resource type="Script" path="res://scenes/boat.gd" id="1_saspy"]
+
+[sub_resource type="Animation" id="Animation_l4b6o"]
+resource_name = "sink"
+length = 60.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 59.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 100)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 28.7),
+"transitions": PackedFloat32Array(1, 1.93187),
+"update": 0,
+"values": [0.0, 0.340339]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nwa3y"]
+_data = {
+"sink": SubResource("Animation_l4b6o")
+}
+
+[node name="Boat" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_saspy")
+
+[node name="BoatPolygon" type="Polygon2D" parent="."]
+position = Vector2(0, 1.84874)
+rotation = 0.0119417
+polygon = PackedVector2Array(-188, -54, 206, -46, 113, 32, -128, 29)
+
+[node name="Polygon2D2" type="Polygon2D" parent="BoatPolygon"]
+position = Vector2(215, 88)
+polygon = PackedVector2Array(-185, -191, -187, -125, -164, -126, -162, -188)
+
+[node name="Polygon2D3" type="Polygon2D" parent="BoatPolygon"]
+polygon = PackedVector2Array(-64, -101, -68, -34, -45, -34, -43, -102)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../BoatPolygon")
+speed_scale = 0.1
+libraries = {
+"": SubResource("AnimationLibrary_nwa3y")
+}

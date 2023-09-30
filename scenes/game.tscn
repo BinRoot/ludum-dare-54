@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2yjmxun5p8wu"]
+
+[ext_resource type="PackedScene" uid="uid://crqscw606c2o" path="res://scenes/island.tscn" id="1_fuowd"]
+[ext_resource type="PackedScene" uid="uid://di1dvdat5ojlt" path="res://scenes/boat.tscn" id="2_5hvh1"]
+[ext_resource type="PackedScene" uid="uid://u10iin32bqus" path="res://scenes/life_boat.tscn" id="3_1wwey"]
+
+[node name="game" type="Node2D"]
+
+[node name="Island" parent="." instance=ExtResource("1_fuowd")]
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(827, 112, 573, 320, 71, 427)
+
+[node name="Boat" parent="." instance=ExtResource("2_5hvh1")]
+position = Vector2(959, 557)
+
+[node name="LifeBoat" parent="." instance=ExtResource("3_1wwey")]
+position = Vector2(600, 624)

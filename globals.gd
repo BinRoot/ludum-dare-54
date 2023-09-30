@@ -7,3 +7,15 @@ var hp_loss_from_time = 1
 var money_start = 10
 var money_cost_of_cooked_fish = 5
 var money_cost_of_raw_fish = 3
+
+var characters: Array = [
+	{
+		"name": "Convict",
+		"rescued": false,
+	},
+	{
+		"name": "Circus Monkey",
+		"rescued": false,
+	}
+]
+
