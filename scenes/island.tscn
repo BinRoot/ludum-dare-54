@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://crqscw606c2o"]
+
+[ext_resource type="PackedScene" uid="uid://rfxhq88l6qs0" path="res://scenes/character.tscn" id="1_14vv8"]
+
+[node name="Island" type="Node2D"]
+
+[node name="Fisher" parent="." instance=ExtResource("1_14vv8")]
+position = Vector2(795, 267)
+enabled_skills = Array[String](["catch_fish"])
+
+[node name="Cook" parent="." instance=ExtResource("1_14vv8")]
+position = Vector2(112, 253)
+enabled_skills = Array[String](["cook_fish"])
+
+[node name="Label" type="Label" parent="."]
+offset_left = 158.0
+offset_top = 169.0
+offset_right = 198.0
+offset_bottom = 192.0
+text = "cook"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 837.0
+offset_top = 161.0
+offset_right = 877.0
+offset_bottom = 187.0
+text = "fisher"
