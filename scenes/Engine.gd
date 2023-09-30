@@ -17,6 +17,8 @@ const LOCATION_DOCKS = "docks"
 const LOCATION_BUSHES = "bushes"
 const LOCATION_CAMP = "camp"
 
+var utilities_by_action = {}
+
 var current_state = {
 	STATE_SELF: {
 		INVENTORY: {
@@ -147,12 +149,24 @@ func _ready():
 
 
 func _process(delta):
-	var path = sample()
-	print(path) 
+	var pathAndState = sample()
+	var path = pathAndState["path"]
+	var state = pathAndState["state"]
+	var action_name = path[0]
+	var utility = state[STATE_SELF][HP]
+	if action_name not in utilities_by_action:
+		utilities_by_action[action_name] = []
+	utilities_by_action[action_name].push_back(utility)
+
+
+func utility(path):
+	pass
+
 
 func sample():
 	var state = current_state.duplicate(true)
-	return traverse(10, state, [])
+	var path = traverse(20, state, [])
+	return { "path": path, "state": state }
 
 
 func is_skill_valid(skill, state):
@@ -222,4 +236,34 @@ func traverse(depth, state, path):
 		return path
 
 
+func commit_action() -> String:
+	var max_avg_utility: float = -1
+	var best_action: String
+	for action_name in utilities_by_action:
+		var utilities = utilities_by_action[action_name]
+		if len(utilities) > 0:
+			var avg_utility = utilities.reduce(func (x, y): return x + y) / (0.0 + len(utilities))
+			if avg_utility > max_avg_utility:
+				max_avg_utility = avg_utility
+				best_action = action_name
+				
+	print('best_action: ', best_action, ', max_avg_utility: ', max_avg_utility)
+				
+	utilities_by_action = {}
+	
+	
+	if best_action != null:
+		var skill_idx = skills.find(func(x): return x[NAME] == best_action)
+		var found_skill
+		for skill in skills:
+			if skill[NAME] == best_action:
+				found_skill = skill
+				break
+		do_skill(found_skill, current_state)
+	return best_action
+	
 
+
+func _on_timer_timeout():
+	var action_name = commit_action()
+	print(action_name)
