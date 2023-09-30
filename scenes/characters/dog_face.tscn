@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://brvhlm5syoiaa"]
+
+[node name="DogFace" type="Node2D"]
+position = Vector2(-5, 16)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2(2, 0)
+color = Color(0.329412, 0.203922, 0, 1)
+polygon = PackedVector2Array(-11, -52, -17, -61, -38, -54, -38, -33, -30, -19, -27, -33, -18, -53)
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+color = Color(0.627451, 0.341176, 0.243137, 1)
+polygon = PackedVector2Array(4, -59, -15, -52, -22, -39, -17, -23, -16, -18, 22, -16, 23, -22, 32, -34, 32, -44, 21, -56)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(1, -4)
+color = Color(0.545098, 0, 0.141176, 1)
+polygon = PackedVector2Array(-22, -18, -22, -9, -10, 0, 3, -3, 12, 0, 23, -1, 30, -9, 20, -20, 10, -26, -3, -26)
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D"]
+color = Color(0.180392, 0.180392, 0.180392, 1)
+polygon = PackedVector2Array(2, -24, 9, -23, 13, -19, 6, -13, -2, -13, -6, -20)
+
+[node name="Polygon2D4" type="Polygon2D" parent="."]
+position = Vector2(-4, 1)
+color = Color(0.329412, 0.203922, 0, 1)
+polygon = PackedVector2Array(26, -53, 33, -60, 46, -54, 52, -49, 40, -31, 34, -38, 32, -50, 27, -52)

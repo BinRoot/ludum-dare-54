@@ -1,13 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://rfxhq88l6qs0"]
+[gd_scene load_steps=8 format=3 uid="uid://rfxhq88l6qs0"]
 
 [ext_resource type="Script" path="res://scenes/character.gd" id="1_nypho"]
 [ext_resource type="PackedScene" uid="uid://byg24csyru040" path="res://scenes/captain.tscn" id="3_ncgvk"]
 [ext_resource type="PackedScene" uid="uid://bcjgxlhvf740o" path="res://scenes/arm.tscn" id="3_rg8e7"]
 [ext_resource type="PackedScene" uid="uid://m0qo4n447431" path="res://scenes/engine.tscn" id="3_vbpo5"]
+[ext_resource type="PackedScene" uid="uid://bccr4srx8jmth" path="res://scenes/characters/AnimatedCharacter.tscn" id="4_n5iiy"]
+[ext_resource type="PackedScene" uid="uid://1mtrdyc5nsj0" path="res://scenes/hover_stats.tscn" id="6_gii23"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_otxkt"]
-radius = 32.0
-height = 108.0
+radius = 23.0
+height = 62.0
 
 [node name="Character" type="Node2D" groups=["character"]]
 script = ExtResource("1_nypho")
@@ -19,27 +21,36 @@ offset_left = -17.0
 offset_top = -63.0
 offset_right = 23.0
 offset_bottom = -37.0
-text = "hello"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 
+[node name="AnimatedCharacter" parent="." instance=ExtResource("4_n5iiy")]
+
 [node name="LeftArm" parent="." instance=ExtResource("3_rg8e7")]
-position = Vector2(-15, 1)
+z_index = 10
+position = Vector2(3, -11)
 
 [node name="RightArm" parent="." instance=ExtResource("3_rg8e7")]
-position = Vector2(14, 0)
+z_index = 10
+position = Vector2(-6, -11)
 rotation = 3.14159
-scale = Vector2(0.5, -0.5)
+scale = Vector2(0.25, -0.25)
 
 [node name="Captain" parent="." instance=ExtResource("3_ncgvk")]
+visible = false
 position = Vector2(1, 17)
-scale = Vector2(3.025, 3.025)
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CapsuleShape2D_otxkt")
 
+[node name="HoverStats" parent="." instance=ExtResource("6_gii23")]
+visible = false
+position = Vector2(0, -54)
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

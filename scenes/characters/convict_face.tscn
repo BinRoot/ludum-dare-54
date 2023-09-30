@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://dms1w3jtkmrop"]
+
+[ext_resource type="Texture2D" uid="uid://co12ifvdbkik3" path="res://assets/stripe.png" id="1_j16iv"]
+
+[node name="ConvictFace" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-1, -14)
+color = Color(0.858824, 0.494118, 0.447059, 1)
+polygon = PackedVector2Array(-8, -20, -7, -7, -15, 12, -5, 13, -2, 15, 0, 14, 3, 15, 4, 13, 17, 12, 10, -7, 10, -19, 9, -22)
+
+[node name="Hat" type="Polygon2D" parent="."]
+position = Vector2(-1, -12)
+texture = ExtResource("1_j16iv")
+texture_offset = Vector2(8.955, 0)
+texture_scale = Vector2(10, 10)
+polygon = PackedVector2Array(-9, -26, -9, -19, 10, -21, 8, -31)

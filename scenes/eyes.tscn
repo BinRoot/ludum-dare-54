@@ -3,15 +3,14 @@
 [ext_resource type="Script" path="res://scenes/eyes.gd" id="1_1dbdc"]
 
 [node name="Eyes" type="Node2D"]
-scale = Vector2(0.1, 0.1)
 script = ExtResource("1_1dbdc")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2(19, 26)
+position = Vector2(19, 54)
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-34, -36, -34, -19, -31, -12, -28, -19, -28, -37, -30, -44)
+polygon = PackedVector2Array(-39, -34, -39, -16, -31, -12, -28, -19, -27, -37, -30, -44)
 
 [node name="Polygon2D2" type="Polygon2D" parent="."]
-position = Vector2(41, 26)
+position = Vector2(41, 54)
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-34, -36, -34, -27.0288, -34, -19, -31, -13, -28, -19, -28, -24.1095, -28, -36, -31, -43)
+polygon = PackedVector2Array(-34, -36, -34, -27.0288, -34, -19, -31, -12, -23, -16, -21, -24, -21, -24, -21, -34, -31, -43)

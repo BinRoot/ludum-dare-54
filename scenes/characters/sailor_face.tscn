@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dvslmul17kc3y"]
+
+[node name="SailorFace" type="Node2D"]
+position = Vector2(-6, -5)
+
+[node name="Polygon2D4" type="Polygon2D" parent="."]
+color = Color(0.858824, 0.760784, 0.337255, 1)
+polygon = PackedVector2Array(-9, -19, -9, -14, -8, -10, -6, -7, -11, -4, -10, 2, -5, 6, 9, 7, 20, 7, 23, 3, 24, -2, 21, -6, 19, -8, 20, -12, 22, -17, 16, -20)
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+color = Color(0.407843, 0.407843, 0.407843, 1)
+polygon = PackedVector2Array(-15, -24, 6, -25, 29, -26, 16, -19, 0, -20)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+color = Color(0.713726, 0.713726, 0.713726, 1)
+polygon = PackedVector2Array(-6, -21, -3, -28, 4, -32, 11, -32, 16, -30, 21, -24, 20, -20)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-15, -24, -12, -17, 7, -16, 21, -16, 29, -26, 16, -22, 1, -22, -9, -23)
+
+[node name="Polygon2D5" type="Polygon2D" parent="."]
+position = Vector2(-1, -1)
+color = Color(0.623529, 0.0588235, 0.356863, 1)
+polygon = PackedVector2Array(-10, 1, 5, 9, 25, 2, 28, 7, 7, 10, 10, 12, 9, 14, 7, 13, 6, 10, 5, 13, 2, 14, 2, 12, 5, 10, -13, 4)

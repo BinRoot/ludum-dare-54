@@ -1,18 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://crqscw606c2o"]
+[gd_scene load_steps=2 format=3 uid="uid://crqscw606c2o"]
 
-[ext_resource type="PackedScene" uid="uid://rfxhq88l6qs0" path="res://scenes/character.tscn" id="1_14vv8"]
 [ext_resource type="Script" path="res://scenes/island.gd" id="1_sfxij"]
 
 [node name="Island" type="Node2D"]
 script = ExtResource("1_sfxij")
 
-[node name="Fisher" parent="." instance=ExtResource("1_14vv8")]
-position = Vector2(422, 66)
-enabled_skills = Array[String](["catch_fish"])
-
-[node name="Cook" parent="." instance=ExtResource("1_14vv8")]
-position = Vector2(73, 194)
-enabled_skills = Array[String](["cook_fish"])
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.592157, 0.396078, 0.266667, 1)
+polygon = PackedVector2Array(90, 58, 201, 41, 351, 37, 469, 38, 531, 50, 581, 69, 645, 96, 698, 147, 737, 194, 756, 250, 756, 423, 740, 466, 729, 487, 716, 501, 700, 507, 669.839, 505.946, 619, 476, 582, 476, 547, 486, 515, 512, 485, 544, 462, 564, 432, 575, 378, 578, 336, 571, 290, 575, 250, 583, 224, 593, 190, 594, 151, 583, 130, 577, 101, 561, 71, 519, 45, 441, 24, 397, 7, 323, 21, 132, 52, 89)
 
 [node name="Locations" type="Node2D" parent="."]
 
@@ -35,10 +30,13 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "camp"
 
 [node name="Docks" type="Node2D" parent="Locations" groups=["docks"]]
-position = Vector2(581, 237)
+position = Vector2(711, 318)
 
 [node name="Label" type="Label" parent="Locations/Docks"]
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "docks"
+
+[node name="CharacterHolder" type="Node2D" parent="."]
+position = Vector2(711, 459)

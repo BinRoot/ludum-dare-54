@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bforwe2cqleoh"]
+
+[node name="OperaSingerFace" type="Node2D"]
+position = Vector2(1, 24)
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+color = Color(0.607843, 0.611765, 0.239216, 1)
+polygon = PackedVector2Array(-27, -55, -30, -43, -38, -43, -43, -30, -40, -23, -41, -13, -45, -7, -40, -7, -37, -13, -33, -21, -37, -25, -38, -34, -34, -40, -28, -40, -24, -46, -22, -54)
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D3"]
+color = Color(0.607843, 0.611765, 0.239216, 1)
+polygon = PackedVector2Array(29, -47, 31, -38, 35, -36, 43, -29, 48, -28, 51, -26, 52, -22, 45, -25, 39, -29, 35, -33, 29, -36, 26, -43, 26, -51)
+
+[node name="Polygon2D4" type="Polygon2D" parent="."]
+color = Color(0.835294, 0.635294, 0.858824, 1)
+polygon = PackedVector2Array(-27, -57, -29, -36, -34, -32, -26, -18, 9, -17, 26, -19, 35, -30, 23, -34, 27, -52, -7, -65)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+color = Color(0.32549, 0.32549, 0.32549, 1)
+polygon = PackedVector2Array(-15, -71, -24, -79, -27, -92, -30, -83, -30, -72, -26, -66)
+
+[node name="Polygon2D5" type="Polygon2D" parent="."]
+color = Color(0.588235, 0.580392, 0.254902, 1)
+polygon = PackedVector2Array(-29, -44, -18, -46, -11, -52, -7, -61, 5, -59, 9, -50, 18, -43, 28, -45, 29, -55, -4, -66, -18, -59, -27, -52)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.219608, 0.301961, 0.25098, 1)
+polygon = PackedVector2Array(-29, -50, -20, -53, -4, -56, 12, -54, 31, -45, 32, -57, 23, -75, -3, -79, -20, -77, -31, -63)
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D"]
+position = Vector2(4, -2)
+color = Color(0.521569, 0.521569, 0.521569, 1)
+polygon = PackedVector2Array(15, -69, 22, -76, 30, -85, 33, -94, 35, -78, 31, -68, 23, -63)

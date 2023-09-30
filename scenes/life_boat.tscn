@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://u10iin32bqus"]
+[gd_scene load_steps=7 format=3 uid="uid://u10iin32bqus"]
 
 [ext_resource type="PackedScene" uid="uid://byg24csyru040" path="res://scenes/captain.tscn" id="1_jx5uk"]
 [ext_resource type="Script" path="res://scenes/life_boat.gd" id="1_stw7f"]
@@ -42,26 +42,92 @@ tracks/2/keys = {
 "update": 0,
 "values": [0.0, -0.20944, 0.0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PassengerNode:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(6, -21), Vector2(6, -18), Vector2(7, -22), Vector2(6, -21)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PassengerNode:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.139626, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_uah0e"]
+resource_name = "return"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2),
+"transitions": PackedFloat32Array(0.535887, 1.93187, 1),
+"update": 0,
+"values": [Vector2(-399.418, -39.4398), Vector2(-284, -3), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dh8sc"]
+resource_name = "steer"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 3, 5.9),
+"transitions": PackedFloat32Array(1.1487, 0.933033, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-134, -1), Vector2(-424, -43), Vector2(-706, -199)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_04jjx"]
 _data = {
-"float": SubResource("Animation_ipysp")
+"float": SubResource("Animation_ipysp"),
+"return": SubResource("Animation_uah0e"),
+"steer": SubResource("Animation_dh8sc")
 }
 
-[node name="LifeBoat" type="Node2D"]
-scale = Vector2(3, 3)
+[node name="LifeBoatHolder" type="Node2D"]
 script = ExtResource("1_stw7f")
 
-[node name="Captain" parent="." instance=ExtResource("1_jx5uk")]
+[node name="LifeBoat" type="Node2D" parent="."]
+scale = Vector2(2, 2)
+
+[node name="Captain" parent="LifeBoat" instance=ExtResource("1_jx5uk")]
 position = Vector2(-7, -3)
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="PassengerNode" type="Node2D" parent="LifeBoat"]
+position = Vector2(6.5, -13)
+scale = Vector2(0.5, 0.5)
+
+[node name="Polygon2D" type="Polygon2D" parent="LifeBoat"]
 color = Color(0.858824, 0.643137, 0.337255, 1)
 antialiased = true
 polygon = PackedVector2Array(-24, -11, -17, -9, -9, -7, 4, -7, 13, -9, 19, -11, 18, -2, 13, 0, -2, 1, -20, 0, -23, -3)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-speed_scale = 0.2
+root_node = NodePath("../LifeBoat")
 libraries = {
 "": SubResource("AnimationLibrary_04jjx")
 }
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

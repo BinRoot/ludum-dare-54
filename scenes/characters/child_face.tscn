@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://8qli075j3gxh"]
+
+[node name="ChildFace" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(2, 5)
+color = Color(0.882353, 0.760784, 0.72549, 1)
+polygon = PackedVector2Array(-26, -37, -32, -32, -35, -22, -35, -14, -31, -8, -26, -3, -8, -1, 7, 0, 15, -4, 25, -10, 32, -16, 33, -25, 26, -35, 17, -39, 8, -46, -7, -46, -19, -39)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2(2, 5)
+color = Color(0.341176, 0.666667, 0.592157, 1)
+polygon = PackedVector2Array(-8, -42, -6, -40, -1, -42, 5, -40, 8, -42, 14, -41, 16, -44, 20, -42, 16, -47, 9, -49, -9, -49, -16, -46, -19, -43, -12, -44, -12, -41)
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+position = Vector2(2, 10)
+color = Color(0.905882, 0.52549, 0.752941, 1)
+polygon = PackedVector2Array(-19, -29, -16, -26, -13, -23, -14, -15, -18, -12, -22, -11, -21, -10, -17, -11, -13, -15, -11, -19, 8, -20, 9, -16, 10, -13, 14, -11, 19, -12, 19, -14, 14, -13, 11, -14, 10, -16, 10, -20, 12, -24, 14, -27, 18, -27, 19, -29, 14, -29, 11, -27, 10, -22, -11, -21, -11, -23, -15, -28, -18, -30)

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://co0w1vskkkage"]
+
+[node name="HousewifeFace" type="Node2D"]
+
+[node name="Polygon2D4" type="Polygon2D" parent="."]
+position = Vector2(1, -2)
+color = Color(0.505882, 0.447059, 0.392157, 1)
+polygon = PackedVector2Array(-16, -15, -14, -6, -11, 0, -2, 3, 5, 0, 8, -5, 10, -20, -6, -27)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(3, -2)
+color = Color(0.835294, 0.631373, 0.807843, 1)
+polygon = PackedVector2Array(-10, -30, -10, -36, -3, -40, 7, -39, 10, -34, 11, -27, 3, -25)
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+position = Vector2(0, -4)
+color = Color(0.74902, 0.415686, 0.752941, 1)
+polygon = PackedVector2Array(-4, -22, 5, -20, 11, -16, 10, -11, 17, -13, 17, -22, 7, -29, -3, -30)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2(5, -4)
+color = Color(0.917647, 0.470588, 0.8, 1)
+polygon = PackedVector2Array(-28, -23, -18, -30, -10, -32, -2, -27, -3, -23, -13, -19, -20, -11, -20, -4, -28, -15)

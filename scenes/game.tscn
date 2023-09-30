@@ -1,20 +1,158 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2yjmxun5p8wu"]
+[gd_scene load_steps=12 format=3 uid="uid://b2yjmxun5p8wu"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_8wjs5"]
 [ext_resource type="PackedScene" uid="uid://crqscw606c2o" path="res://scenes/island.tscn" id="1_fuowd"]
+[ext_resource type="Texture2D" uid="uid://du2bjcapndsv8" path="res://assets/waves.jpg" id="2_2kblw"]
 [ext_resource type="PackedScene" uid="uid://di1dvdat5ojlt" path="res://scenes/boat.tscn" id="2_5hvh1"]
 [ext_resource type="PackedScene" uid="uid://u10iin32bqus" path="res://scenes/life_boat.tscn" id="3_1wwey"]
+[ext_resource type="FontFile" uid="uid://cy2uudh2tl0ve" path="res://assets/Uni Sans Heavy.otf" id="6_f3wke"]
+
+[sub_resource type="Animation" id="Animation_ppgia"]
+resource_name = "pan_camera_left"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1631, 457), Vector2(1045, 439)]
+}
+
+[sub_resource type="Animation" id="Animation_0w6en"]
+resource_name = "pan_camera_to_island"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(2.07053, 1),
+"update": 0,
+"values": [Vector2(1631, 457), Vector2(402, 300)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7678p"]
+_data = {
+"pan_camera_left": SubResource("Animation_ppgia"),
+"pan_camera_to_island": SubResource("Animation_0w6en")
+}
+
+[sub_resource type="Animation" id="Animation_027vu"]
+resource_name = "shout"
+length = 10.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DialogBox:polygon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [PackedVector2Array(1127, 202, 1085, 220, 1114, 300, 1095, 375, 1145, 389, 1206, 409, 1298, 401, 1388, 412, 1431, 356, 1573, 397, 1448, 280, 1482, 172, 1423, 179, 1350, 157, 1260, 176, 1162, 158), PackedVector2Array(1173, 185, 1153, 214, 1103, 225, 1091, 297, 1137, 346, 1157, 403, 1266, 384, 1298, 417, 1392, 361, 1466, 332, 1557, 369, 1487, 252, 1437, 196, 1425, 157, 1340, 176, 1260, 153)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DialogBox:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 10),
+"transitions": PackedFloat32Array(0.466517, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DialogBox:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8, 2, 4, 6, 7.7, 9.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.0174533, 0.0, -0.0174533, 0.0, -0.0174533, 0.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wlwic"]
+_data = {
+"shout": SubResource("Animation_027vu")
+}
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_8wjs5")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -831.0
+offset_top = -286.0
+offset_right = 901.0
+offset_bottom = 1446.0
+scale = Vector2(2, 1)
+texture = ExtResource("2_2kblw")
+
 [node name="Island" parent="." instance=ExtResource("1_fuowd")]
 
-[node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(827, 112, 573, 320, 71, 427)
-
 [node name="Boat" parent="." instance=ExtResource("2_5hvh1")]
-position = Vector2(959, 557)
+position = Vector2(1952, 576)
 
 [node name="LifeBoat" parent="." instance=ExtResource("3_1wwey")]
-position = Vector2(600, 624)
+position = Vector2(1397, 720)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1631, 457)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7678p")
+}
+
+[node name="DialogBox" type="Polygon2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+rotation = -0.0174533
+polygon = PackedVector2Array(1127, 202, 1085, 220, 1114, 300, 1095, 375, 1145, 389, 1206, 409, 1298, 401, 1388, 412, 1431, 356, 1573, 397, 1448, 280, 1482, 172, 1423, 179, 1350, 157, 1260, 176, 1162, 158)
+
+[node name="DialogCharacterName" type="Label" parent="DialogBox"]
+offset_left = 1232.0
+offset_top = 197.0
+offset_right = 1360.0
+offset_bottom = 236.0
+theme_override_colors/font_color = Color(0.886275, 0.333333, 0.301961, 1)
+theme_override_fonts/font = ExtResource("6_f3wke")
+theme_override_font_sizes/font_size = 14
+text = "text"
+horizontal_alignment = 1
+
+[node name="DialogContent" type="Label" parent="DialogBox"]
+offset_left = 1177.0
+offset_top = 243.0
+offset_right = 1422.0
+offset_bottom = 330.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_f3wke")
+theme_override_font_sizes/font_size = 20
+text = "test"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="DialogAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wlwic")
+}
+
+[connection signal="boat_sunk" from="Boat" to="." method="_on_boat_boat_sunk"]
+[connection signal="character_hovered" from="Boat" to="." method="_on_boat_character_hovered"]
+[connection signal="character_tapped" from="Boat" to="." method="_on_boat_character_tapped"]
+[connection signal="passenger_rescued" from="LifeBoat" to="." method="_on_life_boat_passenger_rescued"]

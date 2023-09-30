@@ -27,7 +27,7 @@ var current_state = {
 			ITEM_MONEY: 0,
 		},
 		HP: Globals.hp_start,
-		LOCATION: LOCATION_DOCKS,
+		LOCATION: LOCATION_BUSHES,
 	},
 }
 
@@ -227,7 +227,7 @@ func _ready():
 
 
 func _physics_process(_delta):
-	for i in range(10):
+	for i in range(1):
 		register_sample()
 
 
@@ -256,6 +256,7 @@ func remove_skills(skill_names):
 	for skill_name_to_remove in skill_names:
 		for skill in skills:
 			if skill[NAME] == skill_name_to_remove:
+				print('actually removed ', skill[NAME])
 				skill[INPUT] = {
 					STATE_SELF: {
 						LOCATION: func(x): return false
