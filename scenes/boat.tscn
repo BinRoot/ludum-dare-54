@@ -36,12 +36,9 @@ _data = {
 }
 
 [node name="Boat" type="Node2D"]
-scale = Vector2(2, 2)
 script = ExtResource("1_saspy")
 
 [node name="BoatPolygon" type="Polygon2D" parent="."]
-position = Vector2(0, 1.84874)
-rotation = 0.0119417
 polygon = PackedVector2Array(-188, -54, 206, -46, 113, 32, -128, 29)
 
 [node name="Polygon2D2" type="Polygon2D" parent="BoatPolygon"]
@@ -50,6 +47,14 @@ polygon = PackedVector2Array(-185, -191, -187, -125, -164, -126, -162, -188)
 
 [node name="Polygon2D3" type="Polygon2D" parent="BoatPolygon"]
 polygon = PackedVector2Array(-64, -101, -68, -34, -45, -34, -43, -102)
+
+[node name="Choice1Node" type="Node2D" parent="BoatPolygon"]
+position = Vector2(-230, -74)
+rotation = -0.0119417
+
+[node name="Choice2Node" type="Node2D" parent="BoatPolygon"]
+position = Vector2(-83, -66)
+rotation = -0.0119417
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../BoatPolygon")

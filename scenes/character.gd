@@ -1,5 +1,7 @@
 extends Node2D
 
+signal character_tapped
+
 var trait_skills = ["cook_fish", "catch_fish"]
 
 @export var enabled_skills: Array[String] = ["cook_fish", "catch_fish"]
@@ -7,6 +9,9 @@ var trait_skills = ["cook_fish", "catch_fish"]
 
 @onready var engine = $Engine
 @onready var debug_label = $DebugLabel
+
+@onready var left_arm = $LeftArm
+@onready var right_arm = $RightArm
 
 var target_point: Vector2
 
@@ -44,3 +49,15 @@ func _on_timer_timeout():
 	elif action_name == "navigate_to_camp":
 		target_point = get_tree().get_nodes_in_group("camp")[0].position + random_offset
 		
+func panic():
+	var speed_scale = randf() + 0.5
+	left_arm.shake(speed_scale)
+	right_arm.shake(speed_scale)
+
+
+
+func _on_area_2d_input_event(viewport, event: InputEvent, shape_idx):
+	if event.is_pressed():
+		emit_signal("character_tapped", self)
+	else:
+		panic()
