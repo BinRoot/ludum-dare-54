@@ -22,5 +22,10 @@ func shake(speed_scale):
 	animation_player.play("shake")
 
 
+func idle():
+	pass
+	#animation_player.play("idle")
+
+
 func stop_animation():
 	animation_player.stop()

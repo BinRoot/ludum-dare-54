@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://rfxhq88l6qs0"]
+[gd_scene load_steps=15 format=3 uid="uid://rfxhq88l6qs0"]
 
 [ext_resource type="Script" path="res://scenes/character.gd" id="1_nypho"]
 [ext_resource type="PackedScene" uid="uid://byg24csyru040" path="res://scenes/captain.tscn" id="3_ncgvk"]
@@ -96,6 +96,18 @@ tracks/2/path = NodePath("Cooking:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Fight:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -305,11 +317,40 @@ tracks/6/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_86q4t"]
+resource_name = "fight"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fight:polygon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [PackedVector2Array(-6, 6, -41, -12, -5, -2, -24, -43, 1, -5, 5, -46, 8, -4, 31, -28, 13, -2, 42, -7, 10, 7), PackedVector2Array(-37, 2, -7, 1, -37, -29, -4, -5, -12, -43, 3, -5, 15, -40, 9, -4, 36, -23, 11, 2, 42, 9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fight:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sjmyw"]
 _data = {
 "cooking": SubResource("Animation_vqs1f"),
 "death": SubResource("Animation_npopr"),
 "eating": SubResource("Animation_wd5d1"),
+"fight": SubResource("Animation_86q4t"),
 "fishing": SubResource("Animation_yc2xi"),
 "idle": SubResource("Animation_e585m")
 }
@@ -320,10 +361,17 @@ script = ExtResource("1_nypho")
 [node name="Engine" parent="." instance=ExtResource("3_vbpo5")]
 
 [node name="DebugLabel" type="Label" parent="."]
+visible = false
 offset_left = -17.0
 offset_top = -63.0
 offset_right = 23.0
 offset_bottom = -37.0
+
+[node name="Fight" type="Polygon2D" parent="."]
+visible = false
+scale = Vector2(2, 2)
+color = Color(0.737255, 0.0235294, 0.313726, 1)
+polygon = PackedVector2Array(-6, 6, -41, -12, -5, -2, -24, -43, 1, -5, 5, -46, 8, -4, 31, -28, 13, -2, 42, -7, 10, 7)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0

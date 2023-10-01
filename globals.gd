@@ -33,6 +33,8 @@ const CHARACTER_RES: Resource = preload("res://scenes/character.tscn")
 var boat_sunk: bool = false
 
 var market_inventory = {
+	Globals.ITEM_COOKED_FISH: 0,
+	Globals.ITEM_RAW_FISH: 0,
 }
 
 var skill_eat = {
@@ -62,6 +64,11 @@ var skill_buy_cooked_fish = {
 				Globals.ITEM_MONEY: func(x): return x >= Globals.money_cost_of_cooked_fish
 			},
 			Globals.LOCATION: func(x): return x == Globals.LOCATION_MARKET
+		},
+		Globals.STATE_MARKET: {
+			Globals.INVENTORY: {
+				Globals.ITEM_COOKED_FISH: func(x): return x > 0
+			}
 		}
 	},
 	Globals.OUTPUT: {
@@ -69,6 +76,11 @@ var skill_buy_cooked_fish = {
 			Globals.INVENTORY: {
 				Globals.ITEM_MONEY: func(x): return x - Globals.money_cost_of_cooked_fish,
 				Globals.ITEM_COOKED_FISH: func(x): return x + 1
+			}
+		},
+		Globals.STATE_MARKET: {
+			Globals.INVENTORY: {
+				Globals.ITEM_COOKED_FISH: func(x): return x - 1
 			}
 		}
 	}
@@ -82,6 +94,11 @@ var skill_buy_raw_fish = {
 				Globals.ITEM_MONEY: func(x): return x >= Globals.money_cost_of_raw_fish
 			},
 			Globals.LOCATION: func(x): return x == Globals.LOCATION_MARKET
+		},
+		Globals.STATE_MARKET: {
+			Globals.INVENTORY: {
+				Globals.ITEM_RAW_FISH: func(x): return x > 0
+			}
 		}
 	},
 	Globals.OUTPUT: {
@@ -89,6 +106,11 @@ var skill_buy_raw_fish = {
 			Globals.INVENTORY: {
 				Globals.ITEM_MONEY: func(x): return x - Globals.money_cost_of_raw_fish,
 				Globals.ITEM_RAW_FISH: func(x): return x + 1
+			}
+		},
+		Globals.STATE_MARKET: {
+			Globals.INVENTORY: {
+				Globals.ITEM_RAW_FISH: func(x): return x - 1
 			}
 		}
 	}
@@ -102,13 +124,18 @@ var skill_sell_cooked_fish = {
 				Globals.ITEM_COOKED_FISH: func(x): return x > 0
 			},
 			Globals.LOCATION: func(x): return x == Globals.LOCATION_MARKET
-		}
+		},
 	},
 	Globals.OUTPUT: {
 		Globals.STATE_SELF: {
 			Globals.INVENTORY: {
 				Globals.ITEM_MONEY: func(x): return x + Globals.money_cost_of_cooked_fish,
 				Globals.ITEM_COOKED_FISH: func(x): return x - 1
+			}
+		},
+		Globals.STATE_MARKET: {
+			Globals.INVENTORY: {
+				Globals.ITEM_COOKED_FISH: func(x): return x + 1
 			}
 		}
 	}
@@ -172,6 +199,27 @@ var skill_sell_raw_fish = {
 				Globals.ITEM_MONEY: func(x): return x + Globals.money_cost_of_raw_fish,
 				Globals.ITEM_RAW_FISH: func(x): return x - 1
 			}
+		},
+		Globals.STATE_MARKET: {
+			Globals.INVENTORY: {
+				Globals.ITEM_RAW_FISH: func(x): return x + 1
+			}
+		}
+	}
+}
+
+var skill_fight = {
+	Globals.NAME: "fight",
+	Globals.INPUT: {
+		Globals.STATE_SELF: {}
+	},
+	Globals.OUTPUT: {
+		Globals.STATE_SELF: {
+			Globals.INVENTORY: {
+				Globals.ITEM_RAW_FISH: func(x): return x + 2,
+				Globals.ITEM_MONEY: func(x): return x + 5
+			},
+			Globals.HP: func(x): return x - 5
 		}
 	}
 }
@@ -215,6 +263,7 @@ var skill_cook_fish = {
 var characters: Array = [
 	{
 		"name": "Convict",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/convict_face.tscn"),
 		"shouts": [
@@ -224,29 +273,42 @@ var characters: Array = [
 		],
 		"skills": [
 			skill_catch_fish,
-		]
+			skill_fight,
+		],
+		"money": 0
 	},
 	{
 		"name": "Circus Monkey",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/circus_monkey_face.tscn"),
 		"shouts": [
 			"Forget the trapeze, I need a sea breeze!",
 			"Ooh Oooh Ahh Ahhh!",
-		]
+		],
+		"skills": [
+			skill_fight,
+		],
+		"money": 0
 	},
 	{
 		"name": "Vampire",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/vampire_face.tscn"),
 		"shouts": [
 			"Sunblock's running out, get me outta here!",
 			"Anyone got a coffin ship?",
 			"This ship bites!",
-		]
+		],
+		"skills": [
+			skill_fight,
+		],
+		"money": 5
 	},
 	{
 		"name": "Aristocrat",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/aristocrat_face.tscn"),
 		"shouts": [
@@ -256,19 +318,23 @@ var characters: Array = [
 		],
 		"skills": [
 			skill_cook_fish,
-		]
+		],
+		"money": 15
 	},
 	{
 		"name": "Leper",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/leper_face.tscn"),
 		"shouts": [
 			"I've been social distancing before it was cool",
 			"Quarantine on land is bad, but at sea it's worse!",
-		]
+		],
+		"money": 0
 	},
 	{
 		"name": "Fortune Teller",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/fortune_teller.tscn"),
 		"shouts": [
@@ -278,10 +344,12 @@ var characters: Array = [
 		],
 		"skills": [
 			skill_catch_fish
-		]
+		],
+		"money": 5
 	},
 	{
 		"name": "Duck",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/duck_face.tscn"),
 		"shouts": [
@@ -291,10 +359,13 @@ var characters: Array = [
 		],
 		"skills": [
 			skill_catch_fish,
-		]
+			skill_fight,
+		],
+		"money": 0
 	},
 	{
 		"name": "Housewife",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/housewife_face.tscn"),
 		"shouts": [
@@ -303,20 +374,24 @@ var characters: Array = [
 		],
 		"skills": [
 			skill_cook_fish,
-		]
+		],
+		"money": 5
 	},
 	{
 		"name": "Child",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/child_face.tscn"),
 		"shouts": [
 			"Mom said no swimming!",
 			"Is it snack time yet?",
 			"Can I go home now?"
-		]
+		],
+		"money": 0
 	},
 	{
 		"name": "Grandma",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/grandma_face.tscn"),
 		"shouts": [
@@ -325,10 +400,12 @@ var characters: Array = [
 		],
 		"skills": [
 			skill_cook_fish,
-		]
+		],
+		"money": 5
 	},
 	{
 		"name": "Orphan",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/orphan_face.tscn"),
 		"shouts": [
@@ -338,10 +415,12 @@ var characters: Array = [
 		],
 		"skills": [
 			skill_catch_fish,
-		]
+		],
+		"money": 0
 	},
 	{
 		"name": "Fisherman",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/fisherman_face.tscn"),
 		"shouts": [
@@ -351,10 +430,13 @@ var characters: Array = [
 		],
 		"skills": [
 			skill_catch_fish,
-		]
+			skill_fight,
+		],
+		"money": 5
 	},
 	{
 		"name": "Chef",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/chef_face.tscn"),
 		"shouts": [
@@ -363,10 +445,13 @@ var characters: Array = [
 		],
 		"skills": [
 			skill_cook_fish,
-		]
+			skill_fight,
+		],
+		"money": 5
 	},
 	{
 		"name": "Doctor",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/doctor_face.tscn"),
 		"shouts": [
@@ -376,10 +461,12 @@ var characters: Array = [
 		],
 		"skills": [
 			skill_cook_fish,
-		]
+		],
+		"money": 10
 	},
 	{
 		"name": "Lumberjack",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/lumberjack_face.tscn"),
 		"shouts": [
@@ -388,20 +475,28 @@ var characters: Array = [
 		],
 		"skills": [
 			skill_catch_fish,
-		]
+			skill_fight,
+		],
+		"money": 0
 	},
 	{
 		"name": "Cowboy",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/cowboy_face.tscn"),
 		"shouts": [
 			"These boots weren't made for swimming!",
 			"Lasso me up a lifeboat!",
 			"Not my first rodeo, but could be my last!"
-		]
+		],
+		"skills": [
+			skill_fight,
+		],
+		"money": 0
 	},
 	{
 		"name": "Sailor",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/sailor_face.tscn"),
 		"shouts": [
@@ -410,10 +505,13 @@ var characters: Array = [
 		],
 		"skills": [
 			skill_catch_fish,
-		]
+			skill_fight,
+		],
+		"money": 0
 	},
 	{
 		"name": "Opera Singer",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/opera_singer_face.tscn"),
 		"shouts": [
@@ -423,10 +521,12 @@ var characters: Array = [
 		],
 		"skills": [
 			skill_cook_fish,
-		]
+		],
+		"money": 5
 	},
 	{
 		"name": "Dog",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/dog_face.tscn"),
 		"shouts": [
@@ -435,10 +535,13 @@ var characters: Array = [
 		],
 		"skills": [
 			skill_catch_fish,
-		]
+			skill_fight,
+		],
+		"money": 0
 	},
 	{
 		"name": "Seamstress",
+		"is_alive": true,
 		RESCUED: false,
 		"face": preload("res://scenes/characters/seamstress_face.tscn"),
 		"shouts": [
@@ -447,7 +550,8 @@ var characters: Array = [
 		],
 		"skills": [
 			skill_cook_fish,
-		]
+		],
+		"money": 5
 	},
 ]
 

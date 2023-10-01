@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://crqscw606c2o"]
+[gd_scene load_steps=6 format=3 uid="uid://crqscw606c2o"]
 
 [ext_resource type="Script" path="res://scenes/island.gd" id="1_sfxij"]
 [ext_resource type="PackedScene" uid="uid://ck4bdrp0s15b5" path="res://scenes/palm_tree.tscn" id="2_mcuyf"]
 [ext_resource type="Texture2D" uid="uid://btencep3sj75s" path="res://assets/sand.png" id="2_u57nx"]
+[ext_resource type="FontFile" uid="uid://cy2uudh2tl0ve" path="res://assets/Uni Sans Heavy.otf" id="4_6ygm2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xjlek"]
+radius = 79.0
 
 [node name="Island" type="Node2D"]
 script = ExtResource("1_sfxij")
@@ -59,6 +63,21 @@ offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "docks"
 
+[node name="Camp" type="Node2D" parent="."]
+
+[node name="Polygon2D2" type="Polygon2D" parent="Camp"]
+color = Color(0.180392, 0.462745, 0.298039, 1)
+polygon = PackedVector2Array(233, 40, 98, 40, 42, 117, 176, 143, 227, 55)
+
+[node name="Polygon2D" type="Polygon2D" parent="Camp"]
+position = Vector2(19, 23)
+color = Color(0.431373, 0.717647, 0.443137, 1)
+polygon = PackedVector2Array(155, 120, 214, 18, 258, 114)
+
+[node name="Polygon2D3" type="Polygon2D" parent="Camp"]
+color = Color(0.196078, 0.196078, 0.196078, 1)
+polygon = PackedVector2Array(231, 50, 209, 141, 249, 139)
+
 [node name="CharacterHolder" type="Node2D" parent="."]
 position = Vector2(711, 459)
 
@@ -74,47 +93,53 @@ scale = Vector2(3, 3)
 position = Vector2(669, 335)
 scale = Vector2(3, 3)
 
-[node name="Camp" type="Node2D" parent="."]
+[node name="MarketBasketRawFish" type="Node2D" parent="."]
 
-[node name="Polygon2D2" type="Polygon2D" parent="Camp"]
-color = Color(0.180392, 0.462745, 0.298039, 1)
-polygon = PackedVector2Array(233, 40, 98, 40, 42, 117, 176, 143, 227, 55)
-
-[node name="Polygon2D" type="Polygon2D" parent="Camp"]
-position = Vector2(19, 23)
-color = Color(0.431373, 0.717647, 0.443137, 1)
-polygon = PackedVector2Array(155, 120, 214, 18, 258, 114)
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.196078, 0.196078, 0.196078, 1)
-polygon = PackedVector2Array(231, 50, 209, 141, 249, 139)
-
-[node name="MarketBaskets" type="Node2D" parent="."]
-
-[node name="Polygon2D2" type="Polygon2D" parent="MarketBaskets"]
+[node name="Polygon2D2" type="Polygon2D" parent="MarketBasketRawFish"]
 color = Color(0.309804, 0.145098, 0.0784314, 1)
 polygon = PackedVector2Array(116, 471, 134, 467, 159, 467, 181, 468, 201, 472, 210, 474, 180, 482, 149, 482)
 
-[node name="Polygon2D3" type="Polygon2D" parent="MarketBaskets"]
+[node name="Polygon2D3" type="Polygon2D" parent="MarketBasketRawFish"]
 position = Vector2(0, 2)
 color = Color(0.776471, 0.14902, 0.286275, 1)
 polygon = PackedVector2Array(127, 481, 127, 471, 133, 470, 134, 473, 141, 478, 149, 474, 155, 477, 159, 475, 168, 470, 178, 475, 184, 474, 189, 469, 195, 471, 199, 481, 144, 496)
 
-[node name="Polygon2D" type="Polygon2D" parent="MarketBaskets"]
+[node name="Polygon2D" type="Polygon2D" parent="MarketBasketRawFish"]
 color = Color(0.568627, 0.239216, 0.156863, 1)
 polygon = PackedVector2Array(115, 469, 126, 521, 153, 528, 174, 528, 196, 521, 212, 473, 180, 481, 159, 480, 142, 478)
 
-[node name="MarketBaskets2" type="Node2D" parent="."]
+[node name="MarketBasketCookedFish" type="Node2D" parent="."]
 position = Vector2(41, 21)
 
-[node name="Polygon2D2" type="Polygon2D" parent="MarketBaskets2"]
+[node name="Polygon2D2" type="Polygon2D" parent="MarketBasketCookedFish"]
 color = Color(0.309804, 0.145098, 0.0784314, 1)
 polygon = PackedVector2Array(116, 471, 134, 467, 159, 467, 181, 468, 201, 472, 210, 474, 180, 482, 149, 482)
 
-[node name="Polygon2D3" type="Polygon2D" parent="MarketBaskets2"]
+[node name="Polygon2D3" type="Polygon2D" parent="MarketBasketCookedFish"]
 color = Color(0.776471, 0.14902, 0.286275, 1)
 polygon = PackedVector2Array(127, 481, 127, 471, 135, 466, 148, 470, 149, 479, 142, 486, 157, 487, 157, 476, 168, 469, 172, 476, 182, 472, 193, 480, 191, 487, 144, 496)
 
-[node name="Polygon2D" type="Polygon2D" parent="MarketBaskets2"]
+[node name="Polygon2D" type="Polygon2D" parent="MarketBasketCookedFish"]
 color = Color(0.639216, 0.278431, 0.188235, 1)
 polygon = PackedVector2Array(115, 469, 126, 521, 153, 528, 174, 528, 196, 521, 212, 473, 180, 481, 159, 480, 142, 478)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(181, 503)
+shape = SubResource("CircleShape2D_xjlek")
+
+[node name="MarketLabel" type="Label" parent="."]
+visible = false
+offset_left = 94.0
+offset_top = 445.0
+offset_right = 268.0
+offset_bottom = 565.0
+theme_override_fonts/font = ExtResource("4_6ygm2")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

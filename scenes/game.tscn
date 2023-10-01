@@ -304,6 +304,52 @@ offset_bottom = 908.0
 theme_override_fonts/font = ExtResource("6_f3wke")
 theme_override_font_sizes/font_size = 60
 text = "bon voyage"
+flat = true
+
+[node name="GameOverText" type="Label" parent="."]
+visible = false
+offset_left = 184.0
+offset_top = 265.0
+offset_right = 567.0
+offset_bottom = 341.0
+theme_override_colors/font_color = Color(0.623529, 0.498039, 0.823529, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("6_f3wke")
+theme_override_font_sizes/font_size = 72
+text = "Game Over"
+
+[node name="GameOverText2" type="Label" parent="."]
+visible = false
+offset_left = 51.0
+offset_top = 347.0
+offset_right = 736.0
+offset_bottom = 423.0
+theme_override_colors/font_color = Color(0.407843, 0.282353, 0.588235, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("6_f3wke")
+theme_override_font_sizes/font_size = 50
+text = "Your Crew Survived X Days"
+
+[node name="GameOverCheck" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="DayLabel" type="Label" parent="."]
+offset_left = -95.0
+offset_top = 25.0
+offset_right = -12.0
+offset_bottom = 63.0
+theme_override_fonts/font = ExtResource("6_f3wke")
+theme_override_font_sizes/font_size = 30
+text = "Day 1"
+
+[node name="DayTimer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
 
 [connection signal="boat_sunk" from="Boat" to="." method="_on_boat_boat_sunk"]
 [connection signal="character_hovered" from="Boat" to="." method="_on_boat_character_hovered"]
@@ -311,3 +357,5 @@ text = "bon voyage"
 [connection signal="passenger_rescued" from="LifeBoat" to="." method="_on_life_boat_passenger_rescued"]
 [connection signal="animation_finished" from="BoatIntro" to="." method="_on_boat_intro_animation_finished"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="GameOverCheck" to="." method="_on_game_over_check_timeout"]
+[connection signal="timeout" from="DayTimer" to="." method="_on_day_timer_timeout"]

@@ -1,25 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://1mtrdyc5nsj0"]
+[gd_scene load_steps=5 format=3 uid="uid://1mtrdyc5nsj0"]
 
 [ext_resource type="Script" path="res://scenes/hover_stats.gd" id="1_x6w2e"]
 [ext_resource type="FontFile" uid="uid://cy2uudh2tl0ve" path="res://assets/Uni Sans Heavy.otf" id="2_70h4q"]
+[ext_resource type="FontFile" uid="uid://ble2f501ehccn" path="res://scenes/resources/hover_label.tres" id="3_dfswg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_72f5g"]
+bg_color = Color(0.517647, 0.937255, 0.47451, 0.796078)
+border_width_left = 5
+border_width_right = 5
+border_color = Color(0.054902, 0.305882, 0.231373, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 0.392157)
+shadow_size = 3
 
 [node name="HoverStats" type="Node2D"]
 script = ExtResource("1_x6w2e")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -70.0
-offset_top = -20.0
-offset_right = 76.0
-offset_bottom = 7.0
+offset_left = -34.0
+offset_top = -6.0
+offset_right = 31.0
+offset_bottom = 8.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_72f5g")
 max_value = 50.0
 step = 1.0
+value = 20.0
 show_percentage = false
 
 [node name="CharacterName" type="Label" parent="."]
-offset_left = -16.0
-offset_top = -43.0
-offset_right = 24.0
-offset_bottom = -20.0
+offset_left = -54.0
+offset_top = -26.0
+offset_right = 54.0
+offset_bottom = -3.0
 theme_override_colors/font_color = Color(0.882353, 0.25098, 0.572549, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0.215686, 0.388235, 0.294118, 1)
@@ -27,3 +42,85 @@ theme_override_constants/shadow_outline_size = 6
 theme_override_fonts/font = ExtResource("2_70h4q")
 theme_override_font_sizes/font_size = 14
 text = "text"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoneyLabel" type="Label" parent="."]
+offset_left = -18.0
+offset_top = 22.0
+offset_right = 14.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(0.854902, 0.831373, 0.968627, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_dfswg")
+theme_override_font_sizes/font_size = 12
+text = "$5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CookedFishLabel" type="Label" parent="."]
+offset_left = 5.0
+offset_top = 22.0
+offset_right = 37.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(0.854902, 0.831373, 0.968627, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_dfswg")
+theme_override_font_sizes/font_size = 12
+text = "$5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RawFishLabel" type="Label" parent="."]
+offset_left = -40.0
+offset_top = 22.0
+offset_right = -8.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(0.854902, 0.831373, 0.968627, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_dfswg")
+theme_override_font_sizes/font_size = 12
+text = "$5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CookedFish" type="Polygon2D" parent="."]
+visible = false
+position = Vector2(0, -37)
+color = Color(0, 0.4, 0.0941176, 1)
+polygon = PackedVector2Array(17, 50, 14, 51, 11, 53, 13, 57, 20, 57, 27, 57, 32, 54, 29, 50, 23, 50)
+
+[node name="CookedFish" type="Polygon2D" parent="CookedFish"]
+position = Vector2(24, -2)
+color = Color(0.780392, 0.337255, 0.466667, 1)
+polygon = PackedVector2Array(-8, 53, -4, 51, 0, 51, 3, 53, 5, 55, 3, 57, -1, 58, -5, 57, -8, 55, -10, 57, -10, 51)
+
+[node name="Polygon2D4" type="Polygon2D" parent="CookedFish"]
+position = Vector2(1, 35)
+color = Color(0.196078, 0.65098, 0.364706, 1)
+polygon = PackedVector2Array(15, 19, 16, 18, 18, 18, 19, 20, 17, 21, 15, 20)
+
+[node name="Polygon2D5" type="Polygon2D" parent="CookedFish"]
+position = Vector2(4, 35)
+color = Color(0.219608, 0.741176, 0.415686, 1)
+polygon = PackedVector2Array(15, 19, 16, 18, 18, 18, 19, 20, 17, 21, 15, 20)
+
+[node name="RawFish" type="Polygon2D" parent="."]
+visible = false
+position = Vector2(-18, -27)
+color = Color(0.94902, 0.713726, 0.807843, 1)
+polygon = PackedVector2Array(-9, 42, -8, 40, -5, 38, -1, 39, 2, 41, -1, 44, 2, 43, 0, 47, -3, 48, -7, 48, -9, 47, -11, 50, -13, 45, -10, 46, -9, 44)
+
+[node name="Polygon2D" type="Polygon2D" parent="RawFish"]
+position = Vector2(-1, -1)
+color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+polygon = PackedVector2Array(-5, 41, -3, 42, -2, 40, -1, 40, -2, 42, 0, 43, 0, 44, -2, 43, -3, 45, -4, 45, -3, 43, -5, 42)
+
+[node name="Coin" type="Polygon2D" parent="."]
+position = Vector2(-1, -2)
+color = Color(0.505882, 0.407843, 0.0666667, 1)
+polygon = PackedVector2Array(-6, 18, -6, 20, -5, 21, -3, 22, -1, 22, 2, 22, 4, 21, 5, 19, 4, 17)
+
+[node name="Polygon2D" type="Polygon2D" parent="Coin"]
+color = Color(1, 0.796078, 0.231373, 1)
+polygon = PackedVector2Array(-6, 18, -5, 20, -3, 21, 2, 21, 4, 20, 5, 18, 4, 15, 0, 14, -4, 15)

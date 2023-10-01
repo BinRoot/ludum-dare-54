@@ -15,13 +15,18 @@ var current_state = STATE_PICK_NEXT_SURVIVOR
 @onready var background_animation: AnimationPlayer = $BackgroundAnimation
 @onready var boat_animation: AnimationPlayer = $BoatIntro
 @onready var start_button: Button = $Button
+@onready var day_label: Label = $DayLabel
+@onready var game_over_label = $GameOverText
+@onready var game_over_label2 = $GameOverText2
+
+var day_count = 0
 
 func _ready():
 	animation_player.stop()
 	background_animation.play("waves")
 
 func _process(delta):
-	pass
+	day_label.text = "Day " + str(day_count)
 
 
 
@@ -41,6 +46,9 @@ func _input(event):
 			Globals.get_character_by_name(chosen_character["name"])["rescued"] = true
 			print("loading ", chosen_character["name"])
 			island.load_character(chosen_character["name"])
+		for c in Globals.characters:
+			if not c["rescued"]:
+				c["is_alive"] = false
 		_on_boat_boat_sunk()
 
 
@@ -54,6 +62,9 @@ func _on_boat_boat_sunk():
 	Globals.boat_sunk = true
 	animation_player.play("pan_camera_to_island")
 	life_boat.dock()
+	for c in Globals.characters:
+		if not c["rescued"]:
+			c["is_alive"] = false
 
 
 func _on_boat_character_hovered(character_name):
@@ -61,7 +72,6 @@ func _on_boat_character_hovered(character_name):
 	if is_rescued:
 		dialog_animation_player.stop()
 	if not animation_player.is_playing() and not is_rescued:
-		
 		if character_name != dialog_character_name.text:
 			dialog_animation_player.stop()
 			var shouts = Globals.get_character_by_name(character_name)["shouts"]
@@ -69,7 +79,6 @@ func _on_boat_character_hovered(character_name):
 			dialog_content.text = shout
 		dialog_animation_player.play("shout")
 		dialog_character_name.text = character_name
-	
 
 
 func _on_boat_intro_animation_finished(anim_name):
@@ -79,4 +88,20 @@ func _on_boat_intro_animation_finished(anim_name):
 func _on_button_pressed():
 	boat_animation.play("intro")
 	start_button.visible = false
-	
+
+
+func _on_game_over_check_timeout():
+	var is_all_dead = true
+	for c in Globals.characters:
+		if c["is_alive"]:
+			is_all_dead = false
+			break
+	if is_all_dead:
+		game_over_label.visible = true
+		game_over_label2.text = "Your crew survived " + str(day_count) + " days"
+		game_over_label2.visible = true
+		day_label.visible = false
+
+
+func _on_day_timer_timeout():
+	day_count += 1

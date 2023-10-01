@@ -47,6 +47,7 @@ func _physics_process(_delta):
 	if current_state[Globals.STATE_SELF][Globals.HP] <= 0:
 		emit_signal("character_died")
 		return
+	current_state[Globals.STATE_MARKET][Globals.INVENTORY] = Globals.market_inventory
 	for i in range(1):
 		register_sample()
 
@@ -116,11 +117,26 @@ func is_skill_valid(skill, state):
 			var is_location_valid = self_location_criteria.call(state[Globals.STATE_SELF][Globals.LOCATION])
 			if not is_location_valid:
 				return false
+				
+	# Check market
+	if Globals.STATE_MARKET in skill[Globals.INPUT]:
+		var skill_input_market = skill[Globals.INPUT][Globals.STATE_MARKET]
+		if Globals.INVENTORY in skill_input_market:
+			var market_inventory_criteria = skill_input_market[Globals.INVENTORY]
+			var is_inventory_valid = true
+			for inventory_name in market_inventory_criteria:
+				var inventory_value = state[Globals.STATE_MARKET][Globals.INVENTORY][inventory_name]
+				if not market_inventory_criteria[inventory_name].call(inventory_value):
+					is_inventory_valid = false
+					break
+			if not is_inventory_valid:
+				return false
 			
 	return true
 
 
-func do_skill(skill, state):
+func do_skill(skill, state, is_real=false):
+	
 	var output = skill[Globals.OUTPUT]
 	
 	if Globals.STATE_SELF in output:
@@ -130,7 +146,8 @@ func do_skill(skill, state):
 			state[Globals.STATE_SELF][Globals.HP] = hp_update.call(state[Globals.STATE_SELF][Globals.HP])
 		
 		# Update inventory
-		if Globals.INVENTORY in output[Globals.STATE_SELF]:
+		var is_real_fight = is_real and skill[Globals.NAME] == "fight"
+		if not is_real_fight and Globals.INVENTORY in output[Globals.STATE_SELF]:
 			for inventory_name in skill[Globals.OUTPUT][Globals.STATE_SELF][Globals.INVENTORY]:
 				state[Globals.STATE_SELF][Globals.INVENTORY][inventory_name] = skill[Globals.OUTPUT][Globals.STATE_SELF][Globals.INVENTORY][inventory_name].call(
 					state[Globals.STATE_SELF][Globals.INVENTORY][inventory_name]
@@ -141,6 +158,22 @@ func do_skill(skill, state):
 			state[Globals.STATE_SELF][Globals.LOCATION] = skill[Globals.OUTPUT][Globals.STATE_SELF][Globals.LOCATION].call(
 				state[Globals.STATE_SELF][Globals.LOCATION]
 			)
+	
+	# Update market
+	if Globals.STATE_MARKET in output:
+		if Globals.INVENTORY in output[Globals.STATE_MARKET]:
+			for inventory_name in skill[Globals.OUTPUT][Globals.STATE_MARKET][Globals.INVENTORY]:
+				state[Globals.STATE_MARKET][Globals.INVENTORY][inventory_name] = skill[Globals.OUTPUT][Globals.STATE_MARKET][Globals.INVENTORY][inventory_name].call(
+					state[Globals.STATE_MARKET][Globals.INVENTORY][inventory_name]
+				)
+		if is_real:
+			Globals.market_inventory = state[Globals.STATE_MARKET][Globals.INVENTORY]
+	
+	# Optimistic bias that markets always improve
+	if not is_real and randi() % 3 == 0:
+		var market_items = state[Globals.STATE_MARKET][Globals.INVENTORY].keys()
+		var inventory_name = market_items[randi() % len(market_items)]
+		state[Globals.STATE_MARKET][Globals.INVENTORY][inventory_name] += 1
 	
 	# Post-skill effects
 	state[Globals.STATE_SELF][Globals.HP] -= Globals.hp_loss_from_time
@@ -189,7 +222,7 @@ func commit_action() -> String:
 			if skill[Globals.NAME] == best_action:
 				found_skill = skill
 				break
-		do_skill(found_skill, current_state)
+		do_skill(found_skill, current_state, true)
 	return best_action
 	
 
