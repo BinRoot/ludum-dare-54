@@ -303,7 +303,7 @@ offset_right = 2315.0
 offset_bottom = 908.0
 theme_override_fonts/font = ExtResource("6_f3wke")
 theme_override_font_sizes/font_size = 60
-text = "To the stars!"
+text = "bon voyage"
 
 [connection signal="boat_sunk" from="Boat" to="." method="_on_boat_boat_sunk"]
 [connection signal="character_hovered" from="Boat" to="." method="_on_boat_character_hovered"]
