@@ -32,6 +32,15 @@ func _on_boat_character_tapped(character_name):
 
 func _input(event):
 	if event.is_action_pressed("ui_end"):
+		# put 5 characters on island
+		var available_characters = Globals.characters.filter(func(x): return !x["rescued"])
+		randomize()
+		available_characters.shuffle()
+		for i in range(min(5, len(available_characters))):
+			var chosen_character = available_characters[i]
+			Globals.get_character_by_name(chosen_character["name"])["rescued"] = true
+			print("loading ", chosen_character["name"])
+			island.load_character(chosen_character["name"])
 		_on_boat_boat_sunk()
 
 

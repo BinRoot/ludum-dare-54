@@ -17,6 +17,8 @@ var trait_skills = ["cook_fish", "catch_fish"]
 @onready var animated_character = $AnimatedCharacter
 @onready var hover_stats = $HoverStats
 
+@onready var action_animation: AnimationPlayer = $ActionAnimation
+
 var target_point: Vector2
 
 
@@ -31,6 +33,7 @@ func _ready():
 #	debug_label.text = name
 	target_point = position
 	animated_character.set_character_name(name)
+	action_animation.play("idle")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,12 +55,27 @@ func _on_timer_timeout():
 	
 	var offset_amount = 100
 	var random_offset = Vector2(randi_range(-offset_amount, offset_amount), randi_range(-offset_amount, offset_amount))
+	
 	if action_name == "navigate_to_market":
 		target_point = get_tree().get_nodes_in_group("market")[0].global_position + random_offset
+		action_animation.play("idle")
 	elif action_name == "navigate_to_docks":
 		target_point = get_tree().get_nodes_in_group("docks")[0].global_position + random_offset
+		action_animation.play("idle")
 	elif action_name == "navigate_to_camp":
 		target_point = get_tree().get_nodes_in_group("camp")[0].global_position + random_offset
+		action_animation.play("idle")
+	elif action_name == "catch_fish":
+		action_animation.speed_scale = randf() + 0.5
+		action_animation.play("fishing")
+	elif action_name == "eat":
+		action_animation.speed_scale = randf() + 0.5
+		action_animation.play("eating")
+	elif action_name == "cook_fish":
+		action_animation.speed_scale = randf() + 0.5
+		action_animation.play("cooking")
+	else:
+		action_animation.play("idle")
 		
 func panic():
 	var speed_scale = randf() + 0.5

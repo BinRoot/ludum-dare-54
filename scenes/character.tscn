@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://rfxhq88l6qs0"]
+[gd_scene load_steps=13 format=3 uid="uid://rfxhq88l6qs0"]
 
 [ext_resource type="Script" path="res://scenes/character.gd" id="1_nypho"]
 [ext_resource type="PackedScene" uid="uid://byg24csyru040" path="res://scenes/captain.tscn" id="3_ncgvk"]
@@ -10,6 +10,221 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_otxkt"]
 radius = 23.0
 height = 78.0
+
+[sub_resource type="Animation" id="Animation_yc2xi"]
+resource_name = "fishing"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fishing:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 3.8, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fishing/Line2D:points")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.7, 1.7, 2.3, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [PackedVector2Array(65, -92, 89, -80, 112, -56, 136, -26, 147, 4, 155, 26), PackedVector2Array(65, -92, 91, -62, 110, -38, 126, -4, 137, 25, 144, 47), PackedVector2Array(65, -92, 91, -91, 119, -74, 143, -44, 153, -10, 153, 20), PackedVector2Array(65, -92, 85, -73, 110, -61, 141, -36, 156, -11, 161, 5), PackedVector2Array(65, -92, 89, -80, 112, -56, 136, -26, 147, 4, 155, 26)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Fishing:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 1.5, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.0872665]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Fishing:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_e585m"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fishing:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Eating:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cooking:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_wd5d1"]
+resource_name = "eating"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eating:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Eating/WholeFish:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Eating/HalfFish:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Eating/QuarterFish:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_vqs1f"]
+resource_name = "cooking"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cooking:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cooking/FireRed:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2, 1.8, 2.4, 3.2, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [PackedVector2Array(-61, 27, -68, 26, -72, 21, -75, 14, -71, 16, -71, 12, -67, 9, -69, 7, -64, 7, -62, 10, -61, 8, -57, 6, -57, 10, -53, 9, -51, 7, -50, 10, -49, 13, -46, 10, -48, 7, -43, 9, -45, 14, -51, 21, -53, 27), PackedVector2Array(-61, 27, -68, 26, -71, 21, -75, 17, -71, 16, -72, 13, -68, 10, -66, 6, -65, 9, -62, 11, -62, 6, -59, 8, -57, 10, -53, 7, -52, 9, -51, 11, -48, 11, -46, 10, -44, 9, -45, 12, -46, 14, -51, 19, -53, 27), PackedVector2Array(-61, 27, -68, 26, -69, 20, -72, 20, -72, 17, -74, 13, -70, 14, -66, 12, -67, 8, -62, 11, -61, 6, -59, 8, -59, 11, -54, 7, -54, 11, -50, 9, -49, 11, -47, 8, -46, 11, -47, 13, -48, 17, -50, 20, -53, 27), PackedVector2Array(-61, 27, -68, 26, -71, 21, -75, 17, -71, 16, -72, 13, -68, 10, -66, 6, -65, 9, -62, 11, -62, 6, -59, 8, -57, 10, -53, 7, -52, 9, -51, 11, -48, 11, -46, 10, -44, 9, -45, 12, -46, 14, -51, 19, -53, 27), PackedVector2Array(-61, 27, -68, 26, -72, 21, -75, 14, -71, 16, -71, 12, -67, 9, -69, 7, -64, 7, -62, 10, -61, 8, -57, 6, -57, 10, -53, 9, -51, 7, -50, 10, -49, 13, -46, 10, -48, 7, -43, 9, -45, 14, -51, 21, -53, 27), PackedVector2Array(-61, 27, -68, 26, -72, 21, -75, 14, -71, 16, -71, 12, -67, 9, -69, 7, -64, 7, -62, 10, -61, 8, -57, 6, -57, 10, -53, 8, -49, 8, -50, 10, -49, 13, -47, 10, -42, 10, -45, 12, -45, 14, -51, 21, -53, 27), PackedVector2Array(-61, 27, -68, 26, -72, 21, -73, 19, -71, 16, -71, 12, -70, 10, -66, 8, -64, 10, -62, 10, -60, 9, -59, 6, -55, 8, -52, 7, -49, 8, -50, 10, -49, 13, -47, 10, -42, 10, -45, 12, -45, 14, -51, 21, -53, 27)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cooking/FireOrange:polygon")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [PackedVector2Array(-64, 26, -64.5, 23.5, -64, 20.5, -62, 23, -61, 19.5, -59, 22, -56.5, 20, -55.5, 22.5, -57, 27), PackedVector2Array(-64, 26, -65.5, 22.5, -64.5, 19.5, -62.5, 21.5, -60.5, 19, -58.5, 20.5, -56, 19.5, -55, 21, -57, 27), PackedVector2Array(-64, 26, -65, 24, -64.5, 21, -62.5, 23.5, -61.5, 20.5, -59.5, 22.5, -57.5, 21, -56, 23.5, -57, 27)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cooking/Pan:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.517633, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Cooking/Fish:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.8, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sjmyw"]
+_data = {
+"cooking": SubResource("Animation_vqs1f"),
+"eating": SubResource("Animation_wd5d1"),
+"fishing": SubResource("Animation_yc2xi"),
+"idle": SubResource("Animation_e585m")
+}
 
 [node name="Character" type="Node2D" groups=["character"]]
 script = ExtResource("1_nypho")
@@ -51,6 +266,87 @@ shape = SubResource("CapsuleShape2D_otxkt")
 visible = false
 z_index = 100
 position = Vector2(0, -54)
+
+[node name="Eating" type="Node2D" parent="."]
+visible = false
+
+[node name="Polygon2D2" type="Polygon2D" parent="Eating"]
+position = Vector2(-5, 81)
+color = Color(0.113725, 0.211765, 0.0823529, 1)
+polygon = PackedVector2Array(-30, -44, -24, -39, 22, -40, 31, -46)
+
+[node name="Plate" type="Polygon2D" parent="Eating"]
+position = Vector2(-5, 81)
+color = Color(0.160784, 0.407843, 0.192157, 1)
+polygon = PackedVector2Array(-24, -66, -42, -62, -51, -56, -52, -50, -41, -44, -20, -42, 20, -42, 46, -45, 56, -53, 53, -62, 44, -65, 31, -68)
+
+[node name="Bone" type="Polygon2D" parent="Eating"]
+color = Color(0.870588, 0.870588, 0.870588, 1)
+polygon = PackedVector2Array(-12, 19, -15, 12, -11, 12, -8, 19, -4, 19, -9, 11, -5, 10, 0, 17, 4, 18, 1, 9, 5, 9, 9, 18, 14, 18, 11, 10, 14, 10, 17, 18, 25, 19, 24, 21, 18, 22, 13, 29, 8, 30, 14, 22, 9, 22, 4, 32, 0, 33, 5, 23, 1, 23, -4, 31, -8, 31, -5, 23, -9, 24, -13, 31, -17, 30, -13, 25, -22, 26, -22, 22)
+
+[node name="QuarterFish" type="Polygon2D" parent="Eating"]
+color = Color(0.827451, 0.501961, 0.486275, 1)
+polygon = PackedVector2Array(-16, 15, -18, 20, -15, 22, -11, 22, -13, 25, -13, 28, -10, 29, -13, 31, -11, 33, -21, 31, -25, 27, -38, 33, -37, 22, -25, 24, -22, 17)
+
+[node name="HalfFish" type="Polygon2D" parent="Eating"]
+color = Color(0.937255, 0.533333, 0.470588, 1)
+polygon = PackedVector2Array(-37, 21, -25, 24, -21, 15, -13, 9, 1, 6, 11, 8, 7, 11, 0, 12, -1, 17, 3, 19, 8, 17, 4, 23, 7, 25, 12, 23, 9, 28, 14, 30, 19, 28, 16, 32, 2, 34, -12, 33, -23, 31, -26, 27, -38, 34)
+
+[node name="WholeFish" type="Polygon2D" parent="Eating"]
+position = Vector2(-5, 81)
+color = Color(1, 0.627451, 0.509804, 1)
+polygon = PackedVector2Array(-33, -61, -32, -45, -22, -54, -14, -48, 3, -46, 18, -48, 35, -58, 28, -58, 36, -61, 28, -66, 21, -74, 6, -76, -8, -73, -19, -65, -22, -57)
+
+[node name="Fishing" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="Fishing"]
+position = Vector2(-10, -6)
+color = Color(0.431373, 0.239216, 0.12549, 1)
+polygon = PackedVector2Array(30, 11, 43, -21, 57, -53, 61, -64, 72, -89, 75, -89, 70, -74, 61, -58, 53, -35, 44, -18, 33, 13)
+
+[node name="Line2D" type="Line2D" parent="Fishing"]
+points = PackedVector2Array(65, -92, 89, -80, 112, -56, 136, -26, 147, 4, 155, 26)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="ActionAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sjmyw")
+}
+
+[node name="Cooking" type="Node2D" parent="."]
+position = Vector2(10, -12)
+
+[node name="Log1" type="Polygon2D" parent="Cooking"]
+color = Color(0.243137, 0.109804, 0.0313726, 1)
+polygon = PackedVector2Array(-59, 24, -75, 27, -71, 34, -55, 25, -36, 20, -41, 14, -54, 22, -72, 13, -77, 19)
+
+[node name="Log2" type="Polygon2D" parent="Cooking"]
+color = Color(0.411765, 0.180392, 0.0431373, 1)
+polygon = PackedVector2Array(-56, 27, -44, 35, -40, 32, -55, 25, -53, 18, -56, 18, -58, 25)
+
+[node name="FireRed" type="Polygon2D" parent="Cooking"]
+color = Color(0.772549, 0, 0.0627451, 1)
+polygon = PackedVector2Array(-61, 27, -68, 26, -72, 21, -75, 14, -71, 16, -71, 12, -67, 9, -69, 7, -64, 7, -62, 10, -61, 8, -57, 6, -57, 10, -53, 9, -51, 7, -50, 10, -49, 13, -46, 10, -48, 7, -43, 9, -45, 14, -51, 21, -53, 27)
+
+[node name="FireOrange" type="Polygon2D" parent="Cooking"]
+position = Vector2(60, -26)
+scale = Vector2(2, 2)
+color = Color(0.956863, 0.454902, 0.192157, 1)
+polygon = PackedVector2Array(-64, 26, -64.5, 23.5, -64, 20.5, -62, 23, -61, 19.5, -59, 22, -56.5, 20, -55.5, 22.5, -57, 27)
+
+[node name="Pan" type="Polygon2D" parent="Cooking"]
+modulate = Color(1, 1, 1, 0)
+color = Color(0.176471, 0.176471, 0.176471, 1)
+polygon = PackedVector2Array(-29, 12, -43, 13, -51, 20, -62, 22, -73, 20, -77, 12, -71, 3, -60, 2, -50, 4, -43, 10, -30, 8)
+
+[node name="Fish" type="Polygon2D" parent="Cooking"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(3, -5)
+color = Color(0.866667, 0.180392, 0.345098, 1)
+polygon = PackedVector2Array(-58, 0, -68, 4, -70, 11, -70, 17, -67, 21, -70, 23, -62, 25, -64, 21, -61, 19, -58, 15, -54, 10, -54, 5)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
