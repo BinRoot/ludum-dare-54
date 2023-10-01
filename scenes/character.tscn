@@ -9,7 +9,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_otxkt"]
 radius = 23.0
-height = 62.0
+height = 78.0
 
 [node name="Character" type="Node2D" groups=["character"]]
 script = ExtResource("1_nypho")
@@ -35,7 +35,7 @@ position = Vector2(3, -11)
 z_index = 10
 position = Vector2(-6, -11)
 rotation = 3.14159
-scale = Vector2(0.25, -0.25)
+scale = Vector2(0.4, -0.4)
 
 [node name="Captain" parent="." instance=ExtResource("3_ncgvk")]
 visible = false
@@ -44,10 +44,12 @@ position = Vector2(1, 17)
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_otxkt")
 
 [node name="HoverStats" parent="." instance=ExtResource("6_gii23")]
 visible = false
+z_index = 100
 position = Vector2(0, -54)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

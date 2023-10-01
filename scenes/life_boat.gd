@@ -36,7 +36,6 @@ func _on_character_tapped(character):
 
 
 func _on_animation_player_animation_finished(anim_name):
-	print('animation stopped: ', anim_name)
 	if anim_name == "steer":
 		if passenger_node.get_child_count() > 0:
 			emit_signal("passenger_rescued", passenger_node.get_child(0).name)

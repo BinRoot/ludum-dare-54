@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var animation_player = $AnimationPlayer
+@onready var head_shake = $HeadShake
 @onready var body: Polygon2D = $Body
 @onready var head: Polygon2D = $Head
 var body_size = 0.5
@@ -23,6 +24,10 @@ func set_character_name(character_name):
 
 func _process(delta):
 	pass
+
+
+func shake():
+	head_shake.play("shake")
 
 
 func play_animation_for_direction(direction: Vector2):

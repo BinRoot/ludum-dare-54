@@ -63,6 +63,7 @@ func panic():
 	var speed_scale = randf() + 0.5
 	left_arm.shake(speed_scale)
 	right_arm.shake(speed_scale)
+	animated_character.shake()
 
 
 

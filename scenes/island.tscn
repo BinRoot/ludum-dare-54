@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://crqscw606c2o"]
+[gd_scene load_steps=3 format=3 uid="uid://crqscw606c2o"]
 
 [ext_resource type="Script" path="res://scenes/island.gd" id="1_sfxij"]
+[ext_resource type="PackedScene" uid="uid://ck4bdrp0s15b5" path="res://scenes/palm_tree.tscn" id="2_mcuyf"]
 
 [node name="Island" type="Node2D"]
 script = ExtResource("1_sfxij")
@@ -15,6 +16,7 @@ polygon = PackedVector2Array(90, 58, 201, 41, 351, 37, 469, 38, 531, 50, 581, 69
 position = Vector2(395, 130)
 
 [node name="Label" type="Label" parent="Locations/Market"]
+visible = false
 offset_right = 57.0
 offset_bottom = 26.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -24,6 +26,7 @@ text = "market"
 position = Vector2(113, 120)
 
 [node name="Label" type="Label" parent="Locations/Camp"]
+visible = false
 offset_right = 43.0
 offset_bottom = 26.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -33,6 +36,7 @@ text = "camp"
 position = Vector2(711, 318)
 
 [node name="Label" type="Label" parent="Locations/Docks"]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -40,3 +44,15 @@ text = "docks"
 
 [node name="CharacterHolder" type="Node2D" parent="."]
 position = Vector2(711, 459)
+
+[node name="PalmTree" parent="." instance=ExtResource("2_mcuyf")]
+position = Vector2(719, 280)
+scale = Vector2(3, 3)
+
+[node name="PalmTree3" parent="." instance=ExtResource("2_mcuyf")]
+position = Vector2(641, 247)
+scale = Vector2(3, 3)
+
+[node name="PalmTree2" parent="." instance=ExtResource("2_mcuyf")]
+position = Vector2(669, 335)
+scale = Vector2(3, 3)

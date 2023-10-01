@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://di1dvdat5ojlt"]
+[gd_scene load_steps=13 format=3 uid="uid://di1dvdat5ojlt"]
 
 [ext_resource type="Script" path="res://scenes/boat.gd" id="1_saspy"]
+[ext_resource type="Texture2D" uid="uid://beb62xlh32310" path="res://assets/boat.png" id="2_xj0sy"]
+[ext_resource type="Texture2D" uid="uid://du2bjcapndsv8" path="res://assets/waves.jpg" id="3_m74sa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wbs73"]
 radius = 65.8027
@@ -78,21 +80,135 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(0.994296, 0.981105, 0.986809, 1), Color(0.996197, 0.987403, 0.991206, 1), Color(0.998099, 0.993702, 0.995603, 1), Color(1, 1, 1, 1), Color(0.998899, 0.996354, 0.997454, 1), Color(0.997798, 0.992707, 0.994909, 1), Color(0.996698, 0.989061, 0.992363, 1), Color(0.995597, 0.985415, 0.989818, 1), Color(0.994496, 0.981768, 0.987272, 1), Color(0.993395, 0.978122, 0.984727, 1), Color(0.992294, 0.974475, 0.982181, 1), Color(0.991194, 0.970829, 0.979635, 1), Color(0.990093, 0.967183, 0.97709, 1), Color(0.988992, 0.963536, 0.974544, 1), Color(0.987891, 0.95989, 0.971999, 1), Color(0.98679, 0.956244, 0.969453, 1), Color(0.98569, 0.952597, 0.966907, 1), Color(0.984589, 0.948951, 0.964362, 1), Color(0.983488, 0.945304, 0.961816, 1), Color(0.982387, 0.941658, 0.959271, 1), Color(0.981287, 0.938012, 0.956725, 1), Color(0.980186, 0.934365, 0.95418, 1), Color(0.979085, 0.930719, 0.951634, 1), Color(0.977984, 0.927073, 0.949088, 1), Color(0.976883, 0.923426, 0.946543, 1), Color(0.975783, 0.91978, 0.943997, 1), Color(0.974682, 0.916133, 0.941452, 1), Color(0.973581, 0.912487, 0.938906, 1), Color(0.97248, 0.908841, 0.936361, 1), Color(0.971379, 0.905194, 0.933815, 1), Color(0.970279, 0.901548, 0.931269, 1), Color(0.969178, 0.897902, 0.928724, 1), Color(0.968077, 0.894255, 0.926178, 1), Color(0.966976, 0.890609, 0.923633, 1), Color(0.965875, 0.886963, 0.921087, 1), Color(0.964775, 0.883316, 0.918541, 1), Color(0.963674, 0.87967, 0.915996, 1), Color(0.962573, 0.876023, 0.91345, 1), Color(0.961472, 0.872377, 0.910905, 1), Color(0.960371, 0.868731, 0.908359, 1), Color(0.959271, 0.865084, 0.905814, 1), Color(0.95817, 0.861438, 0.903268, 1), Color(0.957069, 0.857792, 0.900722, 1), Color(0.955968, 0.854145, 0.898177, 1), Color(0.954868, 0.850499, 0.895631, 1), Color(0.953767, 0.846852, 0.893086, 1), Color(0.952666, 0.843206, 0.89054, 1), Color(0.951565, 0.83956, 0.887995, 1), Color(0.950464, 0.835913, 0.885449, 1), Color(0.949364, 0.832267, 0.882903, 1), Color(0.948263, 0.828621, 0.880358, 1), Color(0.947162, 0.824974, 0.877812, 1), Color(0.946061, 0.821328, 0.875267, 1), Color(0.94496, 0.817681, 0.872721, 1), Color(0.94386, 0.814035, 0.870175, 1), Color(0.942759, 0.810389, 0.86763, 1), Color(0.941658, 0.806742, 0.865084, 1), Color(0.940557, 0.803096, 0.862539, 1), Color(0.939456, 0.79945, 0.859993, 1), Color(0.938356, 0.795803, 0.857448, 1), Color(0.937255, 0.792157, 0.854902, 1), Color(0.939156, 0.798455, 0.859299, 1), Color(0.941058, 0.804753, 0.863696, 1), Color(0.942959, 0.811052, 0.868093, 1), Color(0.94486, 0.81735, 0.87249, 1), Color(0.946762, 0.823648, 0.876887, 1), Color(0.948663, 0.829947, 0.881283, 1), Color(0.950564, 0.836245, 0.88568, 1), Color(0.952466, 0.842543, 0.890077, 1), Color(0.954367, 0.848841, 0.894474, 1), Color(0.956269, 0.85514, 0.898871, 1), Color(0.95817, 0.861438, 0.903268, 1), Color(0.960071, 0.867736, 0.907665, 1), Color(0.961973, 0.874034, 0.912062, 1), Color(0.963874, 0.880333, 0.916459, 1), Color(0.965775, 0.886631, 0.920856, 1), Color(0.967677, 0.892929, 0.925253, 1), Color(0.969578, 0.899228, 0.929649, 1), Color(0.97148, 0.905526, 0.934046, 1), Color(0.973381, 0.911824, 0.938443, 1), Color(0.975282, 0.918122, 0.94284, 1), Color(0.977184, 0.924421, 0.947237, 1), Color(0.979085, 0.930719, 0.951634, 1), Color(0.980986, 0.937017, 0.956031, 1), Color(0.982888, 0.943316, 0.960428, 1), Color(0.984789, 0.949614, 0.964825, 1), Color(0.98669, 0.955912, 0.969222, 1), Color(0.988592, 0.96221, 0.973619, 1), Color(0.990493, 0.968509, 0.978015, 1), Color(0.992395, 0.974807, 0.982412, 1), Color(0.994296, 0.981105, 0.986809, 1)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Water:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_t0lql"]
+resource_name = "calm"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Water:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Water:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("Water:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(17, -184)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jnb1w"]
 _data = {
+"calm": SubResource("Animation_t0lql"),
 "splash": SubResource("Animation_ambcb")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnprk"]
 size = Vector2(870.5, 168.5)
 
+[sub_resource type="Animation" id="Animation_f0p8f"]
+resource_name = "appear"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BoatPolygon/Choice1Node:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(7, -37), Vector2(-326, -188)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BoatPolygon/Choice2Node:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(91, -32), Vector2(-242, -183)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BoatPolygon/Choice1Node:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BoatPolygon/Choice2Node:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mit22"]
+_data = {
+"appear": SubResource("Animation_f0p8f")
+}
+
 [node name="Boat" type="Node2D"]
 script = ExtResource("1_saspy")
 
 [node name="BoatPolygon" type="Polygon2D" parent="."]
-z_index = 1
+z_index = 15
 color = Color(0.160784, 0.160784, 0.160784, 1)
+antialiased = true
+texture = ExtResource("2_xj0sy")
+texture_offset = Vector2(150, 0)
+texture_scale = Vector2(0.05, 0.05)
+texture_rotation = -1.58825
 polygon = PackedVector2Array(-373, -159, -114, -137, 270, -122, 469, -131, 463, -101, 436, -29, 427, 42, 429, 77, -347, 84)
 
 [node name="Polygon2D2" type="Polygon2D" parent="BoatPolygon"]
@@ -113,13 +229,15 @@ color = Color(0.490196, 0.490196, 0.490196, 1)
 polygon = PackedVector2Array(-153, -168, -19, -199, 364, -149, 363, -101, -159, -98)
 
 [node name="Choice1Node" type="Node2D" parent="BoatPolygon"]
+modulate = Color(1, 1, 1, 0)
 z_index = -1
-position = Vector2(-360, -169)
+position = Vector2(7, -37)
 rotation = -0.0119417
 
 [node name="Choice2Node" type="Node2D" parent="BoatPolygon"]
+modulate = Color(1, 1, 1, 0)
 z_index = -1
-position = Vector2(-312, -166)
+position = Vector2(91, -32)
 rotation = -0.0119417
 
 [node name="Polygon2D" type="Polygon2D" parent="BoatPolygon"]
@@ -136,9 +254,15 @@ shape = SubResource("CircleShape2D_wbs73")
 
 [node name="Water" type="Polygon2D" parent="."]
 modulate = Color(0.994296, 0.981105, 0.986809, 1)
-z_index = 1
-position = Vector2(19, -479)
-color = Color(0.0862745, 0.352941, 0.54902, 1)
+z_index = 100
+texture_filter = 1
+texture_repeat = 3
+position = Vector2(30, -478)
+color = Color(0, 0.92549, 0.941176, 1)
+texture = ExtResource("3_m74sa")
+texture_offset = Vector2(10, 0)
+texture_scale = Vector2(20, 20)
+texture_rotation = -1.50273
 polygon = PackedVector2Array(-435, 574, -437, 513, -389, 544, -384, 504, -329, 544, -321, 500, -263, 537, -256, 502, -202, 538, -193, 501, -149, 535, -145, 500, -80, 534, -67, 491, -6, 538, -5, 498, 67, 542, 69, 502, 151, 541, 147, 498, 221, 545, 225, 506, 292, 547, 290, 506, 360, 556, 357, 513, 420, 563, 419, 510, 487, 572, 388, 620, -367, 629)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -154,7 +278,7 @@ libraries = {
 }
 
 [node name="DangerArea" type="Area2D" parent="."]
-position = Vector2(-268, 170)
+position = Vector2(-269, 243)
 collision_layer = 2
 collision_mask = 2
 input_pickable = false
@@ -162,5 +286,10 @@ input_pickable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DangerArea"]
 position = Vector2(278, 24)
 shape = SubResource("RectangleShape2D_lnprk")
+
+[node name="PassengerAppearAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mit22")
+}
 
 [connection signal="area_entered" from="DangerArea" to="." method="_on_danger_area_area_entered"]

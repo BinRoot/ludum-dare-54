@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2yjmxun5p8wu"]
+[gd_scene load_steps=20 format=3 uid="uid://b2yjmxun5p8wu"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_8wjs5"]
 [ext_resource type="PackedScene" uid="uid://crqscw606c2o" path="res://scenes/island.tscn" id="1_fuowd"]
@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://di1dvdat5ojlt" path="res://scenes/boat.tscn" id="2_5hvh1"]
 [ext_resource type="PackedScene" uid="uid://u10iin32bqus" path="res://scenes/life_boat.tscn" id="3_1wwey"]
 [ext_resource type="FontFile" uid="uid://cy2uudh2tl0ve" path="res://assets/Uni Sans Heavy.otf" id="6_f3wke"]
+[ext_resource type="AudioStream" uid="uid://xbof6ljspqh2" path="res://assets/ld54.mp3" id="7_bv74s"]
+[ext_resource type="AudioStream" uid="uid://dutmb5j16bwoj" path="res://assets/explosion.wav" id="8_v7nne"]
+[ext_resource type="AudioStream" uid="uid://c4hod23gp3gwk" path="res://assets/scream.mp3" id="9_0qmtc"]
+[ext_resource type="AudioStream" uid="uid://c2pbsf2o0cjep" path="res://assets/powerUp.wav" id="9_6wswd"]
 
 [sub_resource type="Animation" id="Animation_ppgia"]
 resource_name = "pan_camera_left"
@@ -48,7 +52,6 @@ _data = {
 [sub_resource type="Animation" id="Animation_027vu"]
 resource_name = "shout"
 length = 10.0
-loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -91,6 +94,108 @@ _data = {
 "shout": SubResource("Animation_027vu")
 }
 
+[sub_resource type="Animation" id="Animation_w3oki"]
+resource_name = "waves"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(2, 1), Vector2(2, 0.7), Vector2(2, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7d6cu"]
+_data = {
+"waves": SubResource("Animation_w3oki")
+}
+
+[sub_resource type="Animation" id="Animation_mxvuy"]
+resource_name = "intro"
+length = 11.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 10),
+"transitions": PackedFloat32Array(1.23114, 1),
+"update": 0,
+"values": [Vector2(2053, 797), Vector2(1631, 457)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boat:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 6.3),
+"transitions": PackedFloat32Array(1.1487, 1),
+"update": 0,
+"values": [Vector2(2783, 1197), Vector2(1973, 661)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LifeBoat:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 9.6, 9.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Boat:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(6.1, 6.3, 6.5, 6.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0872665, 0.0872665, 0.0]
+}
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("8_v7nne")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("9_0qmtc")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("9_6wswd")
+}],
+"times": PackedFloat32Array(6.1, 6.9, 9.6)
+}
+tracks/4/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ytfak"]
+_data = {
+"intro": SubResource("Animation_mxvuy")
+}
+
 [node name="game" type="Node2D"]
 script = ExtResource("1_8wjs5")
 
@@ -105,13 +210,14 @@ texture = ExtResource("2_2kblw")
 [node name="Island" parent="." instance=ExtResource("1_fuowd")]
 
 [node name="Boat" parent="." instance=ExtResource("2_5hvh1")]
-position = Vector2(1952, 576)
+position = Vector2(2783, 1197)
 
 [node name="LifeBoat" parent="." instance=ExtResource("3_1wwey")]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(1397, 720)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(1631, 457)
+position = Vector2(2053, 797)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -120,6 +226,7 @@ libraries = {
 
 [node name="DialogBox" type="Polygon2D" parent="."]
 modulate = Color(1, 1, 1, 0)
+position = Vector2(0, 29)
 rotation = -0.0174533
 polygon = PackedVector2Array(1127, 202, 1085, 220, 1114, 300, 1095, 375, 1145, 389, 1206, 409, 1298, 401, 1388, 412, 1431, 356, 1573, 397, 1448, 280, 1482, 172, 1423, 179, 1350, 157, 1260, 176, 1162, 158)
 
@@ -148,11 +255,59 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="DialogAnimationPlayer" type="AnimationPlayer" parent="."]
+speed_scale = 2.0
 libraries = {
 "": SubResource("AnimationLibrary_wlwic")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_bv74s")
+volume_db = -20.0
+pitch_scale = 0.9
+autoplay = true
+
+[node name="BackgroundAnimation" type="AnimationPlayer" parent="."]
+speed_scale = 0.1
+libraries = {
+"": SubResource("AnimationLibrary_7d6cu")
+}
+
+[node name="BoatIntro" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ytfak")
+}
+
+[node name="Iceberg" type="Polygon2D" parent="."]
+color = Color(0.701961, 0.701961, 0.701961, 1)
+polygon = PackedVector2Array(2100, 687, 2088, 637, 2039, 595, 2028, 565, 1995, 544, 1924, 581, 1890, 629, 1879, 700, 1838, 693, 1820, 759, 2154, 755)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.741176, 0.854902, 0.831373, 1)
+polygon = PackedVector2Array(1939, 731, 1961, 678, 2036, 660, 2091, 711, 2107, 755, 1994, 759, 1922, 759)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2(516, 24)
+color = Color(0.678431, 0.760784, 0.796078, 1)
+polygon = PackedVector2Array(1603, 390, 1629, 349, 1698, 321, 1732, 309, 1756, 318, 1801, 347, 1821, 380, 1868, 407)
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+color = Color(0.611765, 0.74902, 0.74902, 1)
+polygon = PackedVector2Array(1599, 366, 1602, 343, 1622, 330, 1639, 342, 1666, 345, 1691, 377, 1664, 384, 1586, 386)
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+
+[node name="Button" type="Button" parent="."]
+offset_left = 1842.0
+offset_top = 839.0
+offset_right = 2315.0
+offset_bottom = 908.0
+theme_override_fonts/font = ExtResource("6_f3wke")
+theme_override_font_sizes/font_size = 60
+text = "To the stars!"
 
 [connection signal="boat_sunk" from="Boat" to="." method="_on_boat_boat_sunk"]
 [connection signal="character_hovered" from="Boat" to="." method="_on_boat_character_hovered"]
 [connection signal="character_tapped" from="Boat" to="." method="_on_boat_character_tapped"]
 [connection signal="passenger_rescued" from="LifeBoat" to="." method="_on_life_boat_passenger_rescued"]
+[connection signal="animation_finished" from="BoatIntro" to="." method="_on_boat_intro_animation_finished"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
