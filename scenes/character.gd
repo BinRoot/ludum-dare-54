@@ -27,8 +27,10 @@ func _ready():
 	for trait_skill in trait_skills:
 		if trait_skill not in enabled_skills:
 			removed_skills.push_back(trait_skill)
-	print(name, ', removed: ', removed_skills)
-	engine.remove_skills(removed_skills)
+	#print(name, ', removed: ', removed_skills)
+	#engine.remove_skills(removed_skills)
+	var skills = Globals.get_character_by_name(name).get("skills", [])
+	engine.add_skills(skills)
 	engine.set_money(money)
 #	debug_label.text = name
 	target_point = position
@@ -103,3 +105,8 @@ func _on_area_2d_mouse_entered():
 
 func _on_area_2d_mouse_exited():
 	hover_stats.visible = false
+
+
+func _on_engine_character_died():
+	timer.stop()
+	action_animation.play("death")

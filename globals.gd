@@ -1,5 +1,23 @@
 extends Node
 
+const ITEM_RAW_FISH: String = 'raw_fish'
+const ITEM_COOKED_FISH: String = 'cooked_fish'
+const ITEM_MONEY: String = 'money'
+
+const STATE_SELF: String = "self"
+const STATE_MARKET: String = "market"
+const INVENTORY: String = "inventory"
+const HP: String = "hp"
+const INPUT: String = "input"
+const OUTPUT: String = "output"
+const NAME: String = "name"
+const LOCATION:String = "location"
+
+const LOCATION_MARKET = "market"
+const LOCATION_DOCKS = "docks"
+const LOCATION_BUSHES = "bushes"
+const LOCATION_CAMP = "camp"
+
 var hp_start = 20
 var hp_gain_from_eating_cooked_fish = 5
 var hp_loss_from_time = 1
@@ -14,6 +32,186 @@ const CHARACTER_RES: Resource = preload("res://scenes/character.tscn")
 
 var boat_sunk: bool = false
 
+var market_inventory = {
+}
+
+var skill_eat = {
+	Globals.NAME: "eat",
+	Globals.INPUT: {
+		Globals.STATE_SELF: {
+			Globals.INVENTORY: {
+				Globals.ITEM_COOKED_FISH: func(x): return x > 0
+			}
+		}
+	},
+	Globals.OUTPUT: {
+		Globals.STATE_SELF: {
+			Globals.INVENTORY: {
+				Globals.ITEM_COOKED_FISH: func(x): return x - 1
+			},
+			Globals.HP: func(x): return x + Globals.hp_gain_from_eating_cooked_fish
+		}
+	}
+}
+
+var skill_buy_cooked_fish = {
+	Globals.NAME: "buy_cooked_fish",
+	Globals.INPUT: {
+		Globals.STATE_SELF: {
+			Globals.INVENTORY: {
+				Globals.ITEM_MONEY: func(x): return x >= Globals.money_cost_of_cooked_fish
+			},
+			Globals.LOCATION: func(x): return x == Globals.LOCATION_MARKET
+		}
+	},
+	Globals.OUTPUT: {
+		Globals.STATE_SELF: {
+			Globals.INVENTORY: {
+				Globals.ITEM_MONEY: func(x): return x - Globals.money_cost_of_cooked_fish,
+				Globals.ITEM_COOKED_FISH: func(x): return x + 1
+			}
+		}
+	}
+}
+
+var skill_buy_raw_fish = {
+	Globals.NAME: "buy_raw_fish",
+	Globals.INPUT: {
+		Globals.STATE_SELF: {
+			Globals.INVENTORY: {
+				Globals.ITEM_MONEY: func(x): return x >= Globals.money_cost_of_raw_fish
+			},
+			Globals.LOCATION: func(x): return x == Globals.LOCATION_MARKET
+		}
+	},
+	Globals.OUTPUT: {
+		Globals.STATE_SELF: {
+			Globals.INVENTORY: {
+				Globals.ITEM_MONEY: func(x): return x - Globals.money_cost_of_raw_fish,
+				Globals.ITEM_RAW_FISH: func(x): return x + 1
+			}
+		}
+	}
+}
+
+var skill_sell_cooked_fish = {
+	Globals.NAME: "sell_cooked_fish",
+	Globals.INPUT: {
+		Globals.STATE_SELF: {
+			Globals.INVENTORY: {
+				Globals.ITEM_COOKED_FISH: func(x): return x > 0
+			},
+			Globals.LOCATION: func(x): return x == Globals.LOCATION_MARKET
+		}
+	},
+	Globals.OUTPUT: {
+		Globals.STATE_SELF: {
+			Globals.INVENTORY: {
+				Globals.ITEM_MONEY: func(x): return x + Globals.money_cost_of_cooked_fish,
+				Globals.ITEM_COOKED_FISH: func(x): return x - 1
+			}
+		}
+	}
+}
+
+var skill_navigate_to_market = {
+	Globals.NAME: "navigate_to_market",
+	Globals.INPUT: {
+		Globals.STATE_SELF: {
+			Globals.LOCATION: func(x): return x != Globals.LOCATION_MARKET
+		}
+	},
+	Globals.OUTPUT: {
+		Globals.STATE_SELF: {
+			Globals.LOCATION: func(_x): return Globals.LOCATION_MARKET
+		}
+	}
+}
+
+var skill_navigate_to_docks = {
+	Globals.NAME: "navigate_to_docks",
+	Globals.INPUT: {
+		Globals.STATE_SELF: {
+			Globals.LOCATION: func(x): return x != Globals.LOCATION_DOCKS
+		}
+	},
+	Globals.OUTPUT: {
+		Globals.STATE_SELF: {
+			Globals.LOCATION: func(_x): return Globals.LOCATION_DOCKS
+		}
+	}
+}
+
+var skill_navigate_to_camp = {
+	Globals.NAME: "navigate_to_camp",
+	Globals.INPUT: {
+		Globals.STATE_SELF: {
+			Globals.LOCATION: func(x): return x != Globals.LOCATION_CAMP
+		}
+	},
+	Globals.OUTPUT: {
+		Globals.STATE_SELF: {
+			Globals.LOCATION: func(_x): return Globals.LOCATION_CAMP
+		}
+	}
+}
+
+var skill_sell_raw_fish = {
+	Globals.NAME: "sell_raw_fish",
+	Globals.INPUT: {
+		Globals.STATE_SELF: {
+			Globals.INVENTORY: {
+				Globals.ITEM_RAW_FISH: func(x): return x > 0
+			},
+			Globals.LOCATION: func(x): return x == Globals.LOCATION_MARKET
+		}
+	},
+	Globals.OUTPUT: {
+		Globals.STATE_SELF: {
+			Globals.INVENTORY: {
+				Globals.ITEM_MONEY: func(x): return x + Globals.money_cost_of_raw_fish,
+				Globals.ITEM_RAW_FISH: func(x): return x - 1
+			}
+		}
+	}
+}
+
+var skill_catch_fish = {
+	Globals.NAME: "catch_fish",
+	Globals.INPUT: {
+		Globals.STATE_SELF: {
+			Globals.LOCATION: func(x): return x == Globals.LOCATION_DOCKS
+		}
+	},
+	Globals.OUTPUT: {
+		Globals.STATE_SELF: {
+			Globals.INVENTORY: {
+				Globals.ITEM_RAW_FISH: func(x): return x + 2
+			}
+		}
+	}
+}
+
+var skill_cook_fish = {
+	Globals.NAME: "cook_fish",
+	Globals.INPUT: {
+		Globals.STATE_SELF: {
+			Globals.INVENTORY: {
+				Globals.ITEM_RAW_FISH: func(x): return x > 0
+			},
+			Globals.LOCATION: func(x): return x == Globals.LOCATION_CAMP
+		}
+	},
+	Globals.OUTPUT: {
+		Globals.STATE_SELF: {
+			Globals.INVENTORY: {
+				Globals.ITEM_RAW_FISH: func(x): return x - 1,
+				Globals.ITEM_COOKED_FISH: func(x): return x + 2
+			}
+		}
+	}
+}
+
 var characters: Array = [
 	{
 		"name": "Convict",
@@ -23,6 +221,9 @@ var characters: Array = [
 			"Time for an island prison break?",
 			"Not quite Alcatraz, but it's close!",
 			"Ahoy there, need a five-star escape artist?",
+		],
+		"skills": [
+			skill_catch_fish,
 		]
 	},
 	{
@@ -52,6 +253,9 @@ var characters: Array = [
 			"Rescue me, I've run out of caviar!",
 			"I demand a first-class lifeboat!",
 			"Ahoy, commoners! First one to save me gets knighted!",
+		],
+		"skills": [
+			skill_cook_fish,
 		]
 	},
 	{
@@ -71,6 +275,9 @@ var characters: Array = [
 			"Tarot says it's time to pick me up!",
 			"I foresee a rescue in my immediate future!",
 			"Help, or I'll hex your GPS!",
+		],
+		"skills": [
+			skill_catch_fish
 		]
 	},
 	{
@@ -81,6 +288,9 @@ var characters: Array = [
 			"What a quack-tastrophe!",
 			"Waddle I do now? Help!",
 			"No ducking around, get me outta here!",
+		],
+		"skills": [
+			skill_catch_fish,
 		]
 	},
 	{
@@ -90,6 +300,9 @@ var characters: Array = [
 		"shouts": [
 			"This isn't the kind of 'swept away' I had in mind!",
 			"No bake sale can fix this!",
+		],
+		"skills": [
+			skill_cook_fish,
 		]
 	},
 	{
@@ -109,6 +322,9 @@ var characters: Array = [
 		"shouts": [
 			"This isn't my idea of a senior cruise!",
 			"I've got wisdom, you've got a boat. Deal?",
+		],
+		"skills": [
+			skill_cook_fish,
 		]
 	},
 	{
@@ -119,6 +335,9 @@ var characters: Array = [
 			"From foster care to nautical flare!",
 			"Adopt me off this island, ASAP!",
 			"Wanted: New guardians with a yacht!",
+		],
+		"skills": [
+			skill_catch_fish,
 		]
 	},
 	{
@@ -129,6 +348,9 @@ var characters: Array = [
 			"Reel me in, captain!",
 			"Gone fishin'... too far!",
 			"I've got bait, you've got boat!"
+		],
+		"skills": [
+			skill_catch_fish,
 		]
 	},
 	{
@@ -138,6 +360,9 @@ var characters: Array = [
 		"shouts": [
 			"Out of the frying pan, into the open sea!",
 			"Only thing salty is how long it takes for a rescue!"
+		],
+		"skills": [
+			skill_cook_fish,
 		]
 	},
 	{
@@ -148,6 +373,9 @@ var characters: Array = [
 			"I can offer free health care!",
 			"This boat is not FDA-approved!",
 			"From emergency room to emergency raft!"
+		],
+		"skills": [
+			skill_cook_fish,
 		]
 	},
 	{
@@ -157,6 +385,9 @@ var characters: Array = [
 		"shouts": [
 			"Flannels don't float, help!",
 			"Timber!"
+		],
+		"skills": [
+			skill_catch_fish,
 		]
 	},
 	{
@@ -176,6 +407,9 @@ var characters: Array = [
 		"shouts": [
 			"Permission to come aboard?",
 			"I've got spinach!"
+		],
+		"skills": [
+			skill_catch_fish,
 		]
 	},
 	{
@@ -186,6 +420,9 @@ var characters: Array = [
 			"It's not over 'til the fat lady sails!",
 			"Ahoy, I can't duet alone here!",
 			"Encore? More like on-shore!"
+		],
+		"skills": [
+			skill_cook_fish,
 		]
 	},
 	{
@@ -195,6 +432,9 @@ var characters: Array = [
 		"shouts": [
 			"This dog park is wet!",
 			"Woof woof woof woof!"
+		],
+		"skills": [
+			skill_catch_fish,
 		]
 	},
 	{
@@ -204,6 +444,9 @@ var characters: Array = [
 		"shouts": [
 			"Measure twice, rescue once!",
 			"Tangled in wool, and also in woe!"
+		],
+		"skills": [
+			skill_cook_fish,
 		]
 	},
 ]

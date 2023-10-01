@@ -1,224 +1,41 @@
 extends Node
 
-const ITEM_RAW_FISH: String = 'raw_fish'
-const ITEM_COOKED_FISH: String = 'cooked_fish'
-const ITEM_MONEY: String = 'money'
+signal character_died
 
-const STATE_SELF: String = "self"
-const INVENTORY: String = "inventory"
-const HP: String = "hp"
-const INPUT: String = "input"
-const OUTPUT: String = "output"
-const NAME: String = "name"
-const LOCATION:String = "location"
 
-const LOCATION_MARKET = "market"
-const LOCATION_DOCKS = "docks"
-const LOCATION_BUSHES = "bushes"
-const LOCATION_CAMP = "camp"
 
 var utilities_by_action = {}
 
 var current_state = {
-	STATE_SELF: {
-		INVENTORY: {
-			ITEM_RAW_FISH: 0,
-			ITEM_COOKED_FISH: 0,
-			ITEM_MONEY: 0,
+	Globals.STATE_SELF: {
+		Globals.INVENTORY: {
+			Globals.ITEM_RAW_FISH: 0,
+			Globals.ITEM_COOKED_FISH: 0,
+			Globals.ITEM_MONEY: 0,
 		},
-		HP: Globals.hp_start,
-		LOCATION: LOCATION_BUSHES,
+		Globals.HP: Globals.hp_start,
+		Globals.LOCATION: Globals.LOCATION_BUSHES,
 	},
-}
-
-var skill_eat = {
-	NAME: "eat",
-	INPUT: {
-		STATE_SELF: {
-			INVENTORY: {
-				ITEM_COOKED_FISH: func(x): return x > 0
-			}
-		}
-	},
-	OUTPUT: {
-		STATE_SELF: {
-			INVENTORY: {
-				ITEM_COOKED_FISH: func(x): return x - 1
-			},
-			HP: func(x): return x + Globals.hp_gain_from_eating_cooked_fish
-		}
+	Globals.STATE_MARKET: {
+		Globals.INVENTORY: {
+			Globals.ITEM_RAW_FISH: 0,
+			Globals.ITEM_COOKED_FISH: 0,
+			Globals.ITEM_MONEY: 0,
+		},
 	}
 }
 
-var skill_buy_cooked_fish = {
-	NAME: "buy_cooked_fish",
-	INPUT: {
-		STATE_SELF: {
-			INVENTORY: {
-				ITEM_MONEY: func(x): return x >= Globals.money_cost_of_cooked_fish
-			},
-			LOCATION: func(x): return x == LOCATION_MARKET
-		}
-	},
-	OUTPUT: {
-		STATE_SELF: {
-			INVENTORY: {
-				ITEM_MONEY: func(x): return x - Globals.money_cost_of_cooked_fish,
-				ITEM_COOKED_FISH: func(x): return x + 1
-			}
-		}
-	}
-}
 
-var skill_buy_raw_fish = {
-	NAME: "buy_raw_fish",
-	INPUT: {
-		STATE_SELF: {
-			INVENTORY: {
-				ITEM_MONEY: func(x): return x >= Globals.money_cost_of_raw_fish
-			},
-			LOCATION: func(x): return x == LOCATION_MARKET
-		}
-	},
-	OUTPUT: {
-		STATE_SELF: {
-			INVENTORY: {
-				ITEM_MONEY: func(x): return x - Globals.money_cost_of_raw_fish,
-				ITEM_RAW_FISH: func(x): return x + 1
-			}
-		}
-	}
-}
-
-var skill_sell_cooked_fish = {
-	NAME: "sell_cooked_fish",
-	INPUT: {
-		STATE_SELF: {
-			INVENTORY: {
-				ITEM_COOKED_FISH: func(x): return x > 0
-			},
-			LOCATION: func(x): return x == LOCATION_MARKET
-		}
-	},
-	OUTPUT: {
-		STATE_SELF: {
-			INVENTORY: {
-				ITEM_MONEY: func(x): return x + Globals.money_cost_of_cooked_fish,
-				ITEM_COOKED_FISH: func(x): return x - 1
-			}
-		}
-	}
-}
-
-var skill_navigate_to_market = {
-	NAME: "navigate_to_market",
-	INPUT: {
-		STATE_SELF: {
-			LOCATION: func(x): return x != LOCATION_MARKET
-		}
-	},
-	OUTPUT: {
-		STATE_SELF: {
-			LOCATION: func(_x): return LOCATION_MARKET
-		}
-	}
-}
-
-var skill_navigate_to_docks = {
-	NAME: "navigate_to_docks",
-	INPUT: {
-		STATE_SELF: {
-			LOCATION: func(x): return x != LOCATION_DOCKS
-		}
-	},
-	OUTPUT: {
-		STATE_SELF: {
-			LOCATION: func(_x): return LOCATION_DOCKS
-		}
-	}
-}
-
-var skill_navigate_to_camp = {
-	NAME: "navigate_to_camp",
-	INPUT: {
-		STATE_SELF: {
-			LOCATION: func(x): return x != LOCATION_CAMP
-		}
-	},
-	OUTPUT: {
-		STATE_SELF: {
-			LOCATION: func(_x): return LOCATION_CAMP
-		}
-	}
-}
-
-var skill_sell_raw_fish = {
-	NAME: "sell_raw_fish",
-	INPUT: {
-		STATE_SELF: {
-			INVENTORY: {
-				ITEM_RAW_FISH: func(x): return x > 0
-			},
-			LOCATION: func(x): return x == LOCATION_MARKET
-		}
-	},
-	OUTPUT: {
-		STATE_SELF: {
-			INVENTORY: {
-				ITEM_MONEY: func(x): return x + Globals.money_cost_of_raw_fish,
-				ITEM_RAW_FISH: func(x): return x - 1
-			}
-		}
-	}
-}
-
-var skill_catch_fish = {
-	NAME: "catch_fish",
-	INPUT: {
-		STATE_SELF: {
-			LOCATION: func(x): return x == LOCATION_DOCKS
-		}
-	},
-	OUTPUT: {
-		STATE_SELF: {
-			INVENTORY: {
-				ITEM_RAW_FISH: func(x): return x + 2
-			}
-		}
-	}
-}
-
-var skill_cook_fish = {
-	NAME: "cook_fish",
-	INPUT: {
-		STATE_SELF: {
-			INVENTORY: {
-				ITEM_RAW_FISH: func(x): return x > 0
-			},
-			LOCATION: func(x): return x == LOCATION_CAMP
-		}
-	},
-	OUTPUT: {
-		STATE_SELF: {
-			INVENTORY: {
-				ITEM_RAW_FISH: func(x): return x - 1,
-				ITEM_COOKED_FISH: func(x): return x + 2
-			}
-		}
-	}
-}
 
 var skills = [
-	skill_eat,
-	skill_buy_raw_fish,
-	skill_buy_cooked_fish,
-	skill_sell_cooked_fish,
-	skill_sell_raw_fish,	
-	skill_navigate_to_market,
-	skill_navigate_to_docks,
-	skill_navigate_to_camp,
-	skill_catch_fish,
-	skill_cook_fish,
+	Globals.skill_eat,
+	Globals.skill_buy_raw_fish,
+	Globals.skill_buy_cooked_fish,
+	Globals.skill_sell_cooked_fish,
+	Globals.skill_sell_raw_fish,	
+	Globals.skill_navigate_to_market,
+	Globals.skill_navigate_to_docks,
+	Globals.skill_navigate_to_camp,
 ]
 
 
@@ -227,6 +44,9 @@ func _ready():
 
 
 func _physics_process(_delta):
+	if current_state[Globals.STATE_SELF][Globals.HP] <= 0:
+		emit_signal("character_died")
+		return
 	for i in range(1):
 		register_sample()
 
@@ -236,7 +56,7 @@ func register_sample():
 	var path = pathAndState["path"]
 	var state = pathAndState["state"]
 	var action_name = path[0]
-	var utility = state[STATE_SELF][HP]
+	var utility = state[Globals.STATE_SELF][Globals.HP]
 	if action_name not in utilities_by_action:
 		utilities_by_action[action_name] = []
 	utilities_by_action[action_name].push_back(utility)
@@ -249,36 +69,41 @@ func sample():
 
 
 func set_money(money):
-	current_state[STATE_SELF][INVENTORY][ITEM_MONEY] = money
+	current_state[Globals.STATE_SELF][Globals.INVENTORY][Globals.ITEM_MONEY] = money
 
 
 func remove_skills(skill_names):
 	for skill_name_to_remove in skill_names:
 		for skill in skills:
-			if skill[NAME] == skill_name_to_remove:
-				print('actually removed ', skill[NAME])
-				skill[INPUT] = {
-					STATE_SELF: {
-						LOCATION: func(x): return false
+			if skill[Globals.NAME] == skill_name_to_remove:
+				print('actually removed ', skill[Globals.NAME])
+				skill[Globals.INPUT] = {
+					Globals.STATE_SELF: {
+						Globals.LOCATION: func(x): return false
 					}
 				}
 				break
 
 
+func add_skills(_skills):
+	for s in _skills:
+		skills.push_back(s)
+
+
 func is_skill_valid(skill, state):
 	# Check state HP
-	if state[STATE_SELF][HP] <= 0:
+	if state[Globals.STATE_SELF][Globals.HP] <= 0:
 		return false
 	
-	if STATE_SELF in skill[INPUT]:
-		var skill_input_self = skill[INPUT][STATE_SELF]
+	if Globals.STATE_SELF in skill[Globals.INPUT]:
+		var skill_input_self = skill[Globals.INPUT][Globals.STATE_SELF]
 	
 		# Check inventory
-		if INVENTORY in skill_input_self:
-			var self_inventory_criteria = skill_input_self[INVENTORY]
+		if Globals.INVENTORY in skill_input_self:
+			var self_inventory_criteria = skill_input_self[Globals.INVENTORY]
 			var is_inventory_valid = true
 			for inventory_name in self_inventory_criteria:
-				var inventory_value = state[STATE_SELF][INVENTORY][inventory_name]
+				var inventory_value = state[Globals.STATE_SELF][Globals.INVENTORY][inventory_name]
 				if not self_inventory_criteria[inventory_name].call(inventory_value):
 					is_inventory_valid = false
 					break
@@ -286,9 +111,9 @@ func is_skill_valid(skill, state):
 				return false
 				
 		# Check location
-		if LOCATION in skill_input_self:
-			var self_location_criteria = skill_input_self[LOCATION]
-			var is_location_valid = self_location_criteria.call(state[STATE_SELF][LOCATION])
+		if Globals.LOCATION in skill_input_self:
+			var self_location_criteria = skill_input_self[Globals.LOCATION]
+			var is_location_valid = self_location_criteria.call(state[Globals.STATE_SELF][Globals.LOCATION])
 			if not is_location_valid:
 				return false
 			
@@ -296,29 +121,29 @@ func is_skill_valid(skill, state):
 
 
 func do_skill(skill, state):
-	var output = skill[OUTPUT]
+	var output = skill[Globals.OUTPUT]
 	
-	if STATE_SELF in output:
+	if Globals.STATE_SELF in output:
 		# Update HP
-		if HP in skill[OUTPUT][STATE_SELF]:
-			var hp_update = skill[OUTPUT][STATE_SELF][HP]
-			state[STATE_SELF][HP] = hp_update.call(state[STATE_SELF][HP])
+		if Globals.HP in skill[Globals.OUTPUT][Globals.STATE_SELF]:
+			var hp_update = skill[Globals.OUTPUT][Globals.STATE_SELF][Globals.HP]
+			state[Globals.STATE_SELF][Globals.HP] = hp_update.call(state[Globals.STATE_SELF][Globals.HP])
 		
 		# Update inventory
-		if INVENTORY in output[STATE_SELF]:
-			for inventory_name in skill[OUTPUT][STATE_SELF][INVENTORY]:
-				state[STATE_SELF][INVENTORY][inventory_name] = skill[OUTPUT][STATE_SELF][INVENTORY][inventory_name].call(
-					state[STATE_SELF][INVENTORY][inventory_name]
+		if Globals.INVENTORY in output[Globals.STATE_SELF]:
+			for inventory_name in skill[Globals.OUTPUT][Globals.STATE_SELF][Globals.INVENTORY]:
+				state[Globals.STATE_SELF][Globals.INVENTORY][inventory_name] = skill[Globals.OUTPUT][Globals.STATE_SELF][Globals.INVENTORY][inventory_name].call(
+					state[Globals.STATE_SELF][Globals.INVENTORY][inventory_name]
 				)
 			
 		# Update location
-		if LOCATION in output[STATE_SELF]:
-			state[STATE_SELF][LOCATION] = skill[OUTPUT][STATE_SELF][LOCATION].call(
-				state[STATE_SELF][LOCATION]
+		if Globals.LOCATION in output[Globals.STATE_SELF]:
+			state[Globals.STATE_SELF][Globals.LOCATION] = skill[Globals.OUTPUT][Globals.STATE_SELF][Globals.LOCATION].call(
+				state[Globals.STATE_SELF][Globals.LOCATION]
 			)
 	
 	# Post-skill effects
-	state[STATE_SELF][HP] -= Globals.hp_loss_from_time
+	state[Globals.STATE_SELF][Globals.HP] -= Globals.hp_loss_from_time
 
 
 func traverse(depth, state, path):
@@ -331,7 +156,7 @@ func traverse(depth, state, path):
 	if len(valid_skill_indices) > 0:
 		var chosen_skill_index = valid_skill_indices[randi() % len(valid_skill_indices)]
 		do_skill(skills[chosen_skill_index], state)
-		return traverse(depth - 1, state, path + [skills[chosen_skill_index][NAME]])
+		return traverse(depth - 1, state, path + [skills[chosen_skill_index][Globals.NAME]])
 	else:
 		return path
 
@@ -361,7 +186,7 @@ func commit_action() -> String:
 	if best_action != null:
 		var found_skill
 		for skill in skills:
-			if skill[NAME] == best_action:
+			if skill[Globals.NAME] == best_action:
 				found_skill = skill
 				break
 		do_skill(found_skill, current_state)
