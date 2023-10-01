@@ -270,6 +270,10 @@ var characters: Array = [
 			"Time for an island prison break?",
 			"Not quite Alcatraz, but it's close!",
 			"Ahoy there, need a five-star escape artist?",
+			"Crime is relative!",
+			"I wish I could steal that life boat!",
+			"I wanted a more mafia-esque ending!",
+			"The sea smells like prison!",
 		],
 		"skills": [
 			skill_catch_fish,
@@ -285,6 +289,9 @@ var characters: Array = [
 		"shouts": [
 			"Forget the trapeze, I need a sea breeze!",
 			"Ooh Oooh Ahh Ahhh!",
+			"Is there a circus in heaven?",
+			"Monkey sea, monkey do!",
+			"In a couple millions years, I'll evolve, and you'll need me!",
 		],
 		"skills": [
 			skill_catch_fish,
@@ -301,6 +308,9 @@ var characters: Array = [
 			"Sunblock's running out, get me outta here!",
 			"Anyone got a coffin ship?",
 			"This ship bites!",
+			"My cape in not water proof!",
+			"Underwater blood is no good for me!",
+			"This is not how I die!"
 		],
 		"skills": [
 			skill_fight,
@@ -316,6 +326,9 @@ var characters: Array = [
 			"Rescue me, I've run out of caviar!",
 			"I demand a first-class lifeboat!",
 			"Ahoy, commoners! First one to save me gets knighted!",
+			"I can't swim with all this gold!",
+			"My wig will get wet!",
+			"Money is no good in hell!"
 		],
 		"skills": [
 			skill_cook_fish,
@@ -330,6 +343,7 @@ var characters: Array = [
 		"shouts": [
 			"I've been social distancing before it was cool",
 			"Quarantine on land is bad, but at sea it's worse!",
+			"This boat is doing worse than I am!",
 		],
 		"skills": [
 			skill_fight,
@@ -345,6 +359,7 @@ var characters: Array = [
 			"Tarot says it's time to pick me up!",
 			"I foresee a rescue in my immediate future!",
 			"Help, or I'll hex your GPS!",
+			"This boat is cursed!",
 		],
 		"skills": [
 			skill_catch_fish
@@ -360,6 +375,7 @@ var characters: Array = [
 			"What a quack-tastrophe!",
 			"Waddle I do now? Help!",
 			"No ducking around, get me outta here!",
+			"Quack quack quack quack!"
 		],
 		"skills": [
 			skill_catch_fish,
@@ -375,6 +391,9 @@ var characters: Array = [
 		"shouts": [
 			"This isn't the kind of 'swept away' I had in mind!",
 			"No bake sale can fix this!",
+			"I just want some tea!",
+			"This is too much action for one day!",
+			"Find me a man that can get me off this boat!",
 		],
 		"skills": [
 			skill_cook_fish,
@@ -389,7 +408,11 @@ var characters: Array = [
 		"shouts": [
 			"Mom said no swimming!",
 			"Is it snack time yet?",
-			"Can I go home now?"
+			"Can I go home now?",
+			"I'm bored!",
+			"There's no internet here!",
+			"I wanna play Fortnite!",
+			"This sucks!"
 		],
 		"skills": [
 			skill_fight,
@@ -404,6 +427,9 @@ var characters: Array = [
 		"shouts": [
 			"This isn't my idea of a senior cruise!",
 			"I've got wisdom, you've got a boat. Deal?",
+			"I'll make you chocolate chip cookies!",
+			"Deary, could you not see this boat is sinking? Help!",
+			"I must have lost my glasses!"
 		],
 		"skills": [
 			skill_cook_fish,
@@ -419,6 +445,7 @@ var characters: Array = [
 			"From foster care to nautical flare!",
 			"Adopt me off this island, ASAP!",
 			"Wanted: New guardians with a yacht!",
+			"Is this my Batman story arch?",
 		],
 		"skills": [
 			skill_catch_fish,
@@ -433,7 +460,8 @@ var characters: Array = [
 		"shouts": [
 			"Reel me in, captain!",
 			"Gone fishin'... too far!",
-			"I've got bait, you've got boat!"
+			"I've got the bait, you've got a boat!",
+			"Arrr, this can't be my final swim!"
 		],
 		"skills": [
 			skill_catch_fish,
@@ -448,7 +476,11 @@ var characters: Array = [
 		"face": preload("res://scenes/characters/chef_face.tscn"),
 		"shouts": [
 			"Out of the frying pan, into the open sea!",
-			"Only thing salty is how long it takes for a rescue!"
+			"Only thing salty is how long it takes for a rescue!",
+			"Let's cook up a plan, and get out of here!",
+			"Scoop me up, captain!",
+			"This boat leaves a sour taste in my mouth!",
+			"Voila! My savior!"
 		],
 		"skills": [
 			skill_cook_fish,
@@ -464,7 +496,9 @@ var characters: Array = [
 		"shouts": [
 			"I can offer free health care!",
 			"This boat is not FDA-approved!",
-			"From emergency room to emergency raft!"
+			"From emergency room to emergency raft!",
+			"The diagnosis: we're doomed!",
+			"My nurse told me you're my way outta here!"
 		],
 		"skills": [
 			skill_cook_fish,
@@ -478,7 +512,9 @@ var characters: Array = [
 		"face": preload("res://scenes/characters/lumberjack_face.tscn"),
 		"shouts": [
 			"Flannels don't float, help!",
-			"Timber!"
+			"Timber!",
+			"My muscles are too big!",
+			"Can I axe you to pick me?"
 		],
 		"skills": [
 			skill_catch_fish,
@@ -494,7 +530,9 @@ var characters: Array = [
 		"shouts": [
 			"These boots weren't made for swimming!",
 			"Lasso me up a lifeboat!",
-			"Not my first rodeo, but could be my last!"
+			"Not my first rodeo, but could be my last!",
+			"That's one pony of a ride you get there!",
+			"Got room for my horses too?"
 		],
 		"skills": [
 			skill_fight,
@@ -509,7 +547,9 @@ var characters: Array = [
 		"face": preload("res://scenes/characters/sailor_face.tscn"),
 		"shouts": [
 			"Permission to come aboard?",
-			"I've got spinach!"
+			"I've got spinach!",
+			"Yo ho!",
+			"ARR!"
 		],
 		"skills": [
 			skill_catch_fish,
@@ -525,7 +565,8 @@ var characters: Array = [
 		"shouts": [
 			"It's not over 'til the fat lady sails!",
 			"Ahoy, I can't duet alone here!",
-			"Encore? More like on-shore!"
+			"Encore? More like on-shore!",
+			"OOOOOOOOOOOOOOOO OOOO OOOOOOOH",
 		],
 		"skills": [
 			skill_cook_fish,
@@ -539,7 +580,10 @@ var characters: Array = [
 		"face": preload("res://scenes/characters/dog_face.tscn"),
 		"shouts": [
 			"This dog park is wet!",
-			"Woof woof woof woof!"
+			"Woof woof woof woof!",
+			"Bark bark!",
+			"Have I been a good boy?",
+			"Can we go on a walk?"
 		],
 		"skills": [
 			skill_catch_fish,
@@ -553,8 +597,10 @@ var characters: Array = [
 		RESCUED: false,
 		"face": preload("res://scenes/characters/seamstress_face.tscn"),
 		"shouts": [
-			"Measure twice, rescue once!",
-			"Tangled in wool, and also in woe!"
+			"Measure twice, and everything will be okay, they said!",
+			"Tangled in wool, and also in woe!",
+			"Guess I got my wires crossed!",
+			"Salt water ruins my silk!"
 		],
 		"skills": [
 			skill_cook_fish,

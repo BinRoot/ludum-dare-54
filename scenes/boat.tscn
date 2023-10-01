@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://di1dvdat5ojlt"]
+[gd_scene load_steps=14 format=3 uid="uid://di1dvdat5ojlt"]
 
 [ext_resource type="Script" path="res://scenes/boat.gd" id="1_saspy"]
 [ext_resource type="Texture2D" uid="uid://beb62xlh32310" path="res://assets/boat.png" id="2_xj0sy"]
 [ext_resource type="Texture2D" uid="uid://du2bjcapndsv8" path="res://assets/waves.jpg" id="3_m74sa"]
+[ext_resource type="AudioStream" uid="uid://bg8jx66ksqa8x" path="res://assets/click.wav" id="4_cy4wn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wbs73"]
 radius = 65.8027
@@ -291,5 +292,8 @@ shape = SubResource("RectangleShape2D_lnprk")
 libraries = {
 "": SubResource("AnimationLibrary_mit22")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_cy4wn")
 
 [connection signal="area_entered" from="DangerArea" to="." method="_on_danger_area_area_entered"]

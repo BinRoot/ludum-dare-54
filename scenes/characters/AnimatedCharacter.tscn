@@ -192,7 +192,7 @@ _data = {
 script = ExtResource("1_ch3c5")
 
 [node name="Body" type="Polygon2D" parent="."]
-color = Color(0.843137, 0.556863, 0.0666667, 1)
+color = Color(0.25098, 0.423529, 0.352941, 1)
 polygon = PackedVector2Array(-6, -21, -22, -9, -14, 8, -10, 19, -14, 21, -12, 23, -6, 21, -7, 13, -4, 10, -1, 10, 3, 10, 5, 16, 5, 24, 10, 22, 10, 19, 7, 20, 15, 7, 22, -10, 5, -21)
 
 [node name="Head" type="Polygon2D" parent="."]
@@ -213,11 +213,12 @@ libraries = {
 
 [node name="WalkRightBackground" type="Polygon2D" parent="."]
 visible = false
-color = Color(0.588235, 0.560784, 0.611765, 1)
+color = Color(0.172549, 0.305882, 0.25098, 1)
 polygon = PackedVector2Array(-6, 4.19251, -1.80749, 16, -4.76899, 21, -2.61498, 23.9615, 0.346514, 24.846, -0.768991, 20.9615, 4.15401, 15.9615, -1, 8)
 
 [node name="WalkRightForeground" type="Polygon2D" parent="."]
 visible = false
+color = Color(0.262745, 0.443137, 0.368627, 1)
 polygon = PackedVector2Array(-8, 3, -7, 8, -1.9615, 18.077, -5, 24.9615, 0, 25.0385, 2.0385, 25.0385, 3.9615, 23, 0, 22, 3.0385, 16.0385, 2, 8.0385, 9.0385, -4.8845, 6, -20, -3, -20, -9.923, -7.9615)
 
 [node name="HeadShake" type="AnimationPlayer" parent="."]

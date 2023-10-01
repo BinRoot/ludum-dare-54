@@ -9,6 +9,7 @@ signal boat_sunk
 @onready var passenger_appear_animation: AnimationPlayer = $PassengerAppearAnimation
 @onready var choice_1_node: Node2D = $BoatPolygon/Choice1Node
 @onready var choice_2_node: Node2D = $BoatPolygon/Choice2Node
+@onready var click_audio: AudioStreamPlayer = $AudioStreamPlayer
 
 var is_sinking = false
 
@@ -81,6 +82,7 @@ func _on_character_tapped(character):
 		child.visible = false
 		child.queue_free()
 	emit_signal("character_tapped", character.name)
+	click_audio.play()
 
 
 func _on_character_hovered(character):
