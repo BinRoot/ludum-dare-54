@@ -4,6 +4,7 @@
 
 [sub_resource type="Animation" id="Animation_d51qk"]
 resource_name = "raise"
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -45,7 +46,7 @@ script = ExtResource("1_x5lfw")
 [node name="Polygon" type="Polygon2D" parent="."]
 position = Vector2(21, -1)
 color = Color(0.839216, 0.772549, 0.560784, 1)
-polygon = PackedVector2Array(18, -8, 29, -9, 40, -16, 49, -22, 55, -31, 61, -40, 67, -53, 74, -57, 67, -67, 57, -60, 61, -55, 52, -41, 41, -25, 29, -17, 18, -15, 8, -13, 7, -6)
+polygon = PackedVector2Array(18, -4, 28, 2.01287, 34.9936, 8.53539, 39.4775, 16.5418, 43.4582, 25.5547, 45.9421, 33.5483, 44.426, 40.5483, 53.4196, 43.0708, 56.9421, 36.0772, 50.9485, 32.5611, 48.4582, 24.0643, 44.9743, 14.5483, 40.4903, 6.0386, 31.0064, -1.9807, 18, -10, 8, -13, 7, -6)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
