@@ -48,7 +48,7 @@ func _physics_process(_delta):
 		emit_signal("character_died")
 		return
 	current_state[Globals.STATE_MARKET][Globals.INVENTORY] = Globals.market_inventory
-	for i in range(1):
+	for i in range(5):
 		register_sample()
 
 
@@ -65,7 +65,7 @@ func register_sample():
 
 func sample():
 	var state = current_state.duplicate(true)
-	var path = traverse(20, state, [])
+	var path = traverse(10, state, [])
 	return { "path": path, "state": state }
 
 
@@ -170,7 +170,7 @@ func do_skill(skill, state, is_real=false):
 			Globals.market_inventory = state[Globals.STATE_MARKET][Globals.INVENTORY]
 	
 	# Optimistic bias that markets always improve
-	if not is_real and randi() % 3 == 0:
+	if not is_real and randi() % 2 == 0:
 		var market_items = state[Globals.STATE_MARKET][Globals.INVENTORY].keys()
 		var inventory_name = market_items[randi() % len(market_items)]
 		state[Globals.STATE_MARKET][Globals.INVENTORY][inventory_name] += 1

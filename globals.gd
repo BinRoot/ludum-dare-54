@@ -23,7 +23,7 @@ var hp_gain_from_eating_cooked_fish = 5
 var hp_loss_from_time = 1
 
 var money_start = 10
-var money_cost_of_cooked_fish = 5
+var money_cost_of_cooked_fish = 6
 var money_cost_of_raw_fish = 3
 
 const RESCUED: String = "rescued"
@@ -287,6 +287,7 @@ var characters: Array = [
 			"Ooh Oooh Ahh Ahhh!",
 		],
 		"skills": [
+			skill_catch_fish,
 			skill_fight,
 		],
 		"money": 0
@@ -329,6 +330,9 @@ var characters: Array = [
 		"shouts": [
 			"I've been social distancing before it was cool",
 			"Quarantine on land is bad, but at sea it's worse!",
+		],
+		"skills": [
+			skill_fight,
 		],
 		"money": 0
 	},
@@ -386,6 +390,9 @@ var characters: Array = [
 			"Mom said no swimming!",
 			"Is it snack time yet?",
 			"Can I go home now?"
+		],
+		"skills": [
+			skill_fight,
 		],
 		"money": 0
 	},
@@ -491,6 +498,7 @@ var characters: Array = [
 		],
 		"skills": [
 			skill_fight,
+			skill_catch_fish,
 		],
 		"money": 0
 	},
